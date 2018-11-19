@@ -12,7 +12,8 @@ class App extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     //this.store 
-    //onechange
+    //onechange 
+    //chnage two
   }
 
   store(){
