@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 
 export default class Footer extends Component{
+    
+    constructor(props) {
+        super(props)
+        this.state = {
+            info: ["About Us","Board Game","Work Sheets","Schools"],
+            secondInfo: ["logo-snapchat","logo-github","logo-twitter","logo-instagram"]
+        }
+    }
     render(){
         return (
             <footer>
@@ -8,7 +16,7 @@ export default class Footer extends Component{
                 <div className="col span-1-of-2">
                     <ul className="footer-nav">
                         {
-                            ["About Us","Board Game","Work Sheets","Schools"].map((item) =>
+                            this.state.info.map((item) =>
                                 {
                                     return <li key={item.toString()}><a href="#">{item}</a></li>
                                 } 
@@ -19,7 +27,7 @@ export default class Footer extends Component{
                 <div className="col span-1-of-2">
                     <ul className="social-links">
                         {
-                            ["logo-snapchat","logo-github","logo-twitter","logo-instagram"].map((item) =>
+                            this.state.secondInfo.map((item) =>
                                 {
                                     return <li key={item.toString()}><a href="#"><ion-icon name={item}></ion-icon></a></li>
                                 } 
