@@ -1,28 +1,28 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+//import './components/resources/css/index.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Base from './components/Base';
+import English from "./components/Subject/English";
+import Maths from "./components/Subject/Maths";
+import Error from "./components/Error";
+import ChildDash from "./components/Dashboards/ChildDashboard";
+import AdultDashboard from './components/Dashboards/AdultDashboard';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Hello World!!
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+    render() {
+        return (
+            <BrowserRouter>
+                <Switch>
+                    <Route exact path="/" component={Base} />
+                    <Route path="/english" component={English} />
+                    <Route path="/maths" component={Maths} />
+                    <Route path="/childdash" component={ChildDash}/>
+                    <Route path="/adultdash" component={AdultDashboard}/>
+                    <Route component={Error} />
+                </Switch>
+            </BrowserRouter>
 
-export default App;
+        );
+    }
+}
+export default App; 
