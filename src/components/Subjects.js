@@ -7,9 +7,7 @@ export default class Subjects extends Component{
         return(
             <section className="section-subjects">
             <div className="row">
-
-               {
-            
+               {        
                 [Math,English].map((item,index) => {  
                     const s = subject[index];
                     return (

@@ -95,14 +95,14 @@ export default class SignUp extends Component {
 
     -------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-    showID = () => {
-        return fbApp.auth.UserInfo.id
-    }
+    //showID = () => {
+      //  return fbApp.auth.UserInfo.id
+    //}
 
     render() {
         return (
             <div>
-                <p>{this.showID()}</p>
+                <p></p>
                 <section className="sign-up">
                     <div className="row">
                         <h2>Sign Up</h2>

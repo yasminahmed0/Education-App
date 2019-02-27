@@ -1,8 +1,13 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; 
+    overflow-x: hidden;
 }
+html,
+body {
+    overflow-x: hidden;
+} 
 
 /* This sets the background colour, font colour, font style (weight and size). 
 - The font-family picks 'lato' first and if the website is unable to load that font style then it goes to Arial and then san-serif as our default.
@@ -14,7 +19,12 @@ html {
     font-family: 'lato', 'Arial', sans-serif;
     font-weight: 200;
     font-size: 18px;
+    overflow-x: hidden;
     text-rendering: optimizeLegibility;
+}
+.cont{
+    max-width: 100vw;
+    overflow-x: hidden;
 }
 /* this will keep the text centred in the way we want */
 .row {
@@ -102,10 +112,10 @@ h2:after { /*This is the line under h2 */
     letter-spacing: 1px;
 }
 .logo {
-    height: 100px;
+    height: 15vh;;
     width: auto;
     float: left;
-    margin-top: 50px;
+    
 }
 
 .navigation{
@@ -156,7 +166,9 @@ blockquote:before {
     left: -3px;
 }
 
-/* -------- FOOTER SECTION ------- */
+/*====================================================================================================*/
+/*=========================================  FOOTER ================================================*/
+/*====================================================================================================*/
 
 footer {
     background-color: #34add1;
@@ -184,7 +196,7 @@ footer {
 .footer-nav li a:link,
 .footer-nav li a:visited,
 .social-links li a:link,
-.social-links li a:visited,{
+.social-links li a:visited{
     text-decoration: none;
     border: 0;
     caption-side: #888;
@@ -196,62 +208,22 @@ footer p{
     margin-top: 20px;
 }
 
-/* ----------- ICONS --------------*/
-.social-links ion-icon {
-    font-size: 32px;
-    display: inline-block;
-}
-
-.section-How-it-works ion-icon,
-.section-benefits-of-signing-up ion-icon{
-    font-size: 128px;
-    color:#00b2c1;
-    width: 60%;
-    margin-left: 20%;
-    display: block;
-}
-
-
-/*====================================================================================================*/
-/*=========================================  BUTTONS  ================================================*/
-/*====================================================================================================*/
-
-/*The things both button have in common are written below and the specific buttons will be done below*/
-.button:link,
-.button:visited{
-    display: inline-block;
-    padding: 10px 20px;
-    font-weight: 300;
-    text-decoration: none;
-    border-radius: 200px;
-    color: aliceblue;
-    margin: 8px 2px;
-}
-
-.filled-button:link,
-.filled-button:visited{
-    background-color: #000;
-    border: 1px solid #000;
-}
-
-.filled-button:hover,
-.filled-button:active{
-    background-color: #fff;
-    border: 1px solid #fff;
-    color: #000;
-}
 
 
 /*====================================================================================================*/
 /*=========================================  IMAGES  ================================================*/
 /*====================================================================================================*/
-.header {
-    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0, 0, 0, 0.5)), url(img/background2.jpg);
+.header{
+   
     background-size: cover;
     background-position: center;
     height: 100vh; /* This makes the image fill up the view, aka full screen */
     background-attachment: fixed;
 }
+.base{
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0, 0, 0, 0.5)), url(img/background2.jpg);
+}
+
 
 
 .image a img {
@@ -271,7 +243,243 @@ cite img {
     border-radius: 50%;
     margin-right: 10px;
     vertical-align: middle;
+
 }
 
 
+/*====================================================================================================*/
+/*=========================================  Subject Pages  ==========================================*/
+/*====================================================================================================*/
+body{
+    background:linear-gradient(to bottom , #9be2fe 0%,#67d1fb 100%);
+    height: 100%;
 
+}
+
+.subjectTitle{
+    font-family: CrayonCrumble, Arial, Helvetica, sans-serif;  
+    font-size: 6vw;
+ 
+}
+
+
+.c1{
+    float: left;
+    margin-right: 4em;
+
+
+}
+.c2{
+    float: left;
+    margin-top:5em; 
+    margin-right:3em;
+}
+.c3{
+    float: left;
+   
+
+    /*outline-style: dashed;*/
+}
+.c4{
+    clear:both;
+    float: left;
+   
+    margin-top: 4em;
+    margin-right: 3em;
+   /* MARGIN-TOP:3.5em;
+    margin-bottom: 3.0em;
+    margin-right: 6.0em;*/
+
+    /*outline-style:dashed;*/
+
+}
+.c5{
+    float:left;
+ 
+    margin-right: 3em;
+
+}
+
+.c6{
+    margin-top: 4em;
+  /* outline-style: dashed;
+    padding: 1.0em;
+    margin-top
+    margin-left: 4.0em;*/
+    float: left;
+}
+.cloud{
+    opacity: 0.85;
+    size:60%;
+
+}
+
+.cloud:hover{
+    opacity: 1;
+}
+
+.cloudc{
+    float: left;
+    width: 90%;
+   /* background-color: chartreuse;
+    outline: dashed chartreuse;*/
+    margin-right: -100em;
+}
+.swanright{
+    float: right;
+    bottom: 0em;
+    margin-right: -0.7em;
+    margin-top: 5em;
+/*background-color: yellow;*/
+    
+}
+.swans{
+ width: 25em;
+}
+.cloudswan{
+    /*background-color: firebrick;*/
+}
+
+
+/*Cloud Bop 
+From: https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.1.1/css/hover.css*/
+/* Bob */
+@-webkit-keyframes hvr-bob {
+    0% {
+      -webkit-transform: translateY(-8px);
+      transform: translateY(-8px);
+    }
+    50% {
+      -webkit-transform: translateY(-4px);
+      transform: translateY(-4px);
+    }
+    100% {
+      -webkit-transform: translateY(-8px);
+      transform: translateY(-8px);
+    }
+  }
+  @keyframes hvr-bob {
+    0% {
+      -webkit-transform: translateY(-8px);
+      transform: translateY(-8px);
+    }
+    50% {
+      -webkit-transform: translateY(-4px);
+      transform: translateY(-4px);
+    }
+    100% {
+      -webkit-transform: translateY(-8px);
+      transform: translateY(-8px);
+    }
+  }
+  @-webkit-keyframes hvr-bob-float {
+    100% {
+      -webkit-transform: translateY(-8px);
+      transform: translateY(-8px);
+    }
+  }
+  @keyframes hvr-bob-float {
+    100% {
+      -webkit-transform: translateY(-8px);
+      transform: translateY(-8px);
+    }
+  }
+  .hvr-bob {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px transparent;
+  }
+  .hvr-bob:hover, .hvr-bob:focus, .hvr-bob:active {
+    -webkit-animation-name: hvr-bob-float, hvr-bob;
+    animation-name: hvr-bob-float, hvr-bob;
+    -webkit-animation-duration: .3s, 1.5s;
+    animation-duration: .3s, 1.5s;
+    -webkit-animation-delay: 0s, .3s;
+    animation-delay: 0s, .3s;
+    -webkit-animation-timing-function: ease-out, ease-in-out;
+    animation-timing-function: ease-out, ease-in-out;
+    -webkit-animation-iteration-count: 1, infinite;
+    animation-iteration-count: 1, infinite;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-direction: normal, alternate;
+    animation-direction: normal, alternate;
+  }
+  
+
+
+
+
+/*====================================================================================================*/
+/*=========================================  Childrens DashBoard  ====================================*/
+/*====================================================================================================*/
+
+@font-face { font-family:CrayonCrumble ; src: url('./font/CrayonCrumble.ttf'); } 
+
+.boards{
+   
+    padding: 3vh 4vw;
+
+}
+.dashContainer{
+  
+    background:linear-gradient(to bottom , #9be2fe 0%,#67d1fb 100%);
+    height: 100%;
+
+}
+
+    .mathsdash, .englishdash {
+    font-family: CrayonCrumble, Arial, Helvetica, sans-serif;  
+    color:white ;
+    background-color:#003400;
+    margin: 0.5vh;
+    border: 0.5vw solid #855E42;
+    font-size: 4vw;
+    text-align: center;
+    width: 39vw;
+}
+
+.subjectProgress{
+    display: inline-block;
+    
+}
+
+.gameProg{
+    }
+
+.game{
+    display: inline-block;
+    float:left;
+    padding:0.2vw;
+}
+.score{
+    float:left;
+    margin-left: 7vw;
+}
+.prog{
+    float: right;
+    padding:0.2vw;
+    font-size: 2vw;
+
+}
+.medals{
+  
+    text-align: center;
+}
+.medalRow{
+    display: inline-block;
+  
+}
+.circle{
+    float: left;
+    margin: 5vh;
+
+    height: 11vh;
+    width: 6vw;
+    background-color:transparent;
+    border: darkcyan dashed;
+    border-radius: 50%;
+    display: inline-block;
+}

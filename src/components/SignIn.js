@@ -23,7 +23,6 @@ export default class SignIn extends Component {
                 <section className="sign-up">
                     <div className="row">
                         <h2>SIGN IN</h2>
-                        <p>SIGN IN NOWWWWWWWWWWWWWWWWWWWWW YESSSS BLUD IT WOKRING HAHAHAHAHAHA</p>
                     </div>
                     <div className="row">
                         <div className="col span-2-of-2 box">
