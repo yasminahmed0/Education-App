@@ -35,7 +35,7 @@ export default class Feedback extends Component{
 
     render(){
         return (
-            <section className="section-feedback">
+            <section className="section-feedback" id="Feedback">
             <div className="row">
                 <h2>feedback</h2>
             </div>

@@ -5,6 +5,8 @@ import Base from './components/Base';
 import English from "./components/Subject/English";
 import Maths from "./components/Subject/Maths";
 import Error from "./components/Error";
+import ChildDash from "./components/Dashboards/ChildDashboard";
+import AdultDashboard from './components/Dashboards/AdultDashboard';
 
 class App extends Component {
     render() {
@@ -14,6 +16,8 @@ class App extends Component {
                     <Route exact path="/" component={Base} />
                     <Route path="/english" component={English} />
                     <Route path="/maths" component={Maths} />
+                    <Route path="/childdash" component={ChildDash}/>
+                    <Route path="/adultdash" component={AdultDashboard}/>
                     <Route component={Error} />
                 </Switch>
             </BrowserRouter>
@@ -21,4 +25,4 @@ class App extends Component {
         );
     }
 }
-export default App; 
+export default App;  

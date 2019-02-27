@@ -1,7 +1,15 @@
 import React, { Component } from 'react'
 import logo from './resources/css/img/logo.png';
-
+import $ from "jquery";
 export default class Header extends Component{
+    componentDidMount(){
+        $('a').on('click', function(e){
+            e.preventDefault();
+            var targetID = $(this).attr('href')
+            var elementPosition = $(targetID).offset().top
+            $('html,body').animate({scrollTop: elementPosition},'slow');
+        }); 
+    }
    
     constructor(props) {
         super(props)
@@ -13,14 +21,15 @@ export default class Header extends Component{
 
     render(){
         return (
-            <header className="header">
+            <header className="header base">
                     <nav>
                         <div className="row">
+                        <script src="./slide.js"></script>
                             <img src={logo} alt="Swan Academics Logo" className="logo"></img>
                             <ul className="navigation">
                                 {
                                     this.state.info.map((item) => {
-                                        return <li key={item.toString()}><a href="#">{item}</a></li>;
+                                        return <li key={item.toString()}><a href={"#"+ item}>{item}</a></li>;
                                     })}
                             </ul>
                         </div>

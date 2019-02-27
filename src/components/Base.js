@@ -46,7 +46,8 @@ class Base extends Component {
         componentToDisplay = isLoggedIn ? <SignUp /> : <SignUp />
 
         return (
-            <div>
+            <div className="cont">
+            <script src="slide.js"></script>
                 {/*  HEADER SECTION */}
                 <Header />
 
