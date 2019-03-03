@@ -26,3 +26,4 @@ class App extends Component {
     }
 }
 export default App;  
+//we can check if someone is signed in, then their account type. Then route them to correct page 
