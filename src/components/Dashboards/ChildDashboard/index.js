@@ -2,17 +2,21 @@ import React, { Component } from 'react';
 import menu from '../../resources/css/img/menu.png';
 import logo from '../../resources/css/img/logo.png';
 import SemiCircleProgressBar from "react-progressbar-semicircle";
-import { fbApp } from '../../../firebase';
+import { fbApp, auth} from '../../../firebase';
+//import * as firebase from 'firebase' //tomorrow try
 //{/* https://www.npmjs.com/package/react-progressbar-semicircle */}
 
 
-
+//when this class/component loads, the constructor is called first 
 class ChildDashboard extends Component{
     constructor(props) {
         super(props);
         this.state ={
             uid: null,
-            email: null
+            email: null,
+            currentPassword: "",
+            repeatedPassword: "",
+            updatedPassword: ""
         }
         fbApp.auth().onAuthStateChanged(function(user) {  
             if(user){
@@ -23,7 +27,8 @@ class ChildDashboard extends Component{
                 this.setState({
                     uid: uid,
                     email: currentuser.email
-                })  
+                }) 
+
             }
             else{
                 window.location.assign("/")
@@ -32,16 +37,22 @@ class ChildDashboard extends Component{
                 // })  
             } 
         }.bind(this))
+        this.handleChange = this.handleChange.bind(this)
+
     }
-    
-    componentWillMount(){   
-    }
-  
-    
+        
     signOut(){
         fbApp.auth().signOut()
         console.log("User has been signed out")
     }
+
+    handleChange = (e) => {
+        const { name, value } = e.target;
+        //check if the same
+        this.setState({ [name]: value }) 
+    }
+
+
 
 	render(){
         const subjectdash = ['mathsdash' ,'englishdash']; //it is inside the render but outside the return section
@@ -73,7 +84,15 @@ class ChildDashboard extends Component{
                 
                 <main>
                     <div className="dashContainer">
-                    <div className="xxx">{this.state.uid}</div>
+                    <div className="xxx">
+                        <div>{this.state.uid}</div>
+                        <div>
+                            <input type="password" name="currentPassword" placeholder="current password" onChange={this.handleChange}></input>
+                            <input type="password" name="repeatedPassword" placeholder="new password" onChange={this.handleChange}></input>
+                            <input type="password" name="updatedPassword"  placeholder="re-enter new password" onChange={this.handleChange}></input>
+                            <button onClick={this.changePassword}>Update Password</button>
+                        </div>
+                    </div>
 
                     <section className="dashboard-subjects">
                         <div className="row boards">
@@ -138,10 +157,26 @@ class ChildDashboard extends Component{
 }
 }
 
- 
-
-
 export default ChildDashboard;
+
+
+    //https://www.youtube.com/watch?v=2neoCVCrJYw
+    // changePassword = () => {
+    //     var user = fbApp.auth().currentUser 
+    //     var credential = firebase.auth.EmailAuthProvider.credential(user.email, this.state.currentPassword)
+         
+    //     user.reauthenticateAndRetrieveDataWithCredential(credential).then(function(user) {
+    //         user.updatePassword(this.state.updatedPassword).then(() => {
+    //             alert("Password succesfully changed")
+    //         }).catch((error) => {
+    //             alert("Cannot update :"+error.message)
+    //         })    
+    //     }).catch(function(error) {
+    //         alert(user.uid)
+    //         alert("second catch: "+error.message)
+    //     });
+    //     //second catch: Cannot read property 'state' of undefined
+    // }
 
 
         //return table

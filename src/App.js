@@ -7,6 +7,7 @@ import Maths from "./components/Subject/Maths";
 import Error from "./components/Error";
 import ChildDash from "./components/Dashboards/ChildDashboard";
 import AdultDashboard from './components/Dashboards/AdultDashboard';
+import mixandmath from './components/Games/mixandmath'
 
 class App extends Component {
     render() {
@@ -18,6 +19,7 @@ class App extends Component {
                     <Route path="/maths" component={Maths} />
                     <Route path="/childdash" component={ChildDash}/>
                     <Route path="/adultdash" component={AdultDashboard}/>
+                    <Route path="/sob" component={mixandmath} />
                     <Route component={Error} />
                 </Switch>
             </BrowserRouter>
