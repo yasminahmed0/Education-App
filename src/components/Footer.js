@@ -18,7 +18,7 @@ export default class Footer extends Component{
                         {
                             this.state.info.map((item) =>
                                 {
-                                    return <li key={item.toString()}><a href="#">{item}</a></li>
+                                    return <li key={item.toString()}>{item}</li>
                                 } 
                             )
                         }

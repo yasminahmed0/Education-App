@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { fbApp, firestoreDB } from '../firebase';
-
-
+//import { fbApp, firestoreDB } from '../firebase';
+import firebase from '../firebase'
+import M from "materialize-css"; 
+import './resources/refined.css'
 
 export default class SignUp extends Component {
 
@@ -12,91 +13,57 @@ export default class SignUp extends Component {
             email: null,
             password: null,
             userType: 'child',
-            id: null,
+            //id: null,
             error: {
                 message: '' 
             }
         }
-
-        this.handleSubmit = this.handleSubmit.bind(this);
-        //this.signOut = this.signOut.bind(this)
-        //https://us-central1-education-app-976ac.cloudfunctions.net/helloWorld
-        //fetch()
+        this.submitForm = this.submitForm.bind(this)   
     }
-    
+    componentDidMount(){
+        M.AutoInit();
+    }
 
-    async handleSubmit(e) {
-        e.preventDefault();//return promises (firecast utube video)
+    submitForm(e){
+        e.preventDefault();
         const { username, email, password, userType } = this.state;
-
-        
-        let UserCredential = await fbApp.auth().createUserWithEmailAndPassword(email, password)
-        .catch(error => {
-            this.setState({ error })
-            
-        });
-        
-        if(this.state.error.message == null){
-            // console.log(UserCredential);
-            let bob = await firestoreDB.collection("Users").doc(UserCredential.user.uid).set({
-                Type: userType,
-                name: username //might make it display name
-            })
-
-            //maybe put into then statement 
-            //add Goal
-            if(this.state.userType == "child"){
-                let yas = await firestoreDB.collection("Children").doc(UserCredential.user.uid).set({
+        //var db = firebase.firestore()
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(UserCredential => {
+            //auth state changes here so what is user doc not finished and strore tries  to get data?
+             firebase.firestore().collection("Users").doc(UserCredential.user.uid).set({
+                name: username,
+                Type: userType
+            }) //can this cause issue if the if statements are executed before User db is filled
+            if(userType === "child"){
+                firebase.firestore().collection("Children").doc(UserCredential.user.uid).set({
                     name: username,
                     email: email,
-                    age: null
+                    age: 0,
+                    goal: ""
+                }).then(() => {
+                    window.location.assign("/dashboard")
                 })
             }
             else{
-                let sid = await firestoreDB.collection("Parent").doc(UserCredential.user.uid).set({
+                firebase.firestore().collection("Parent").doc(UserCredential.user.uid).set({
                     name: username,
                     email: email,
                     children: []
+                }).then(() => {
+                    window.location.assign("/dashboard")
                 })
-            }
-            
-            //each function with then use awit instead
-            //try catch from first await, try to catch the entire function
-            try{
-                var doc = await fbApp.auth().onAuthStateChanged(function(user) {
-                    if(user) {
-                        var account = firestoreDB.collection("Users").doc(user.uid);
-                        account.get()
-                        .then(function(doc){
-                            if (doc.exists) {
-                                var accType = doc.data().Type 
-                                if(accType === "child"){
-                                    //console.log('new person signed up')
-                                    window.location.assign("/childdash")
-                                }
-                                else if(accType == "parent"){
-                                    window.location.assign("/adultdash")
-                                }
-                                else{
-                                    console.log("ERROR")
-                                }
-                
-                                //console.log("Document data:", doc.data());
-                            } 
-                            else {
-                                // doc.data() will be undefined in this case
-                                console.log("No such document!");
-                            }
-                        })
-                    }
-                })
-            }
-            catch(error){
-                console.log('NO CHANGE IN AUTH STATE') 
-            }
-        }
-    }      
+            }   
+        })
+        .catch(error => {
+            this.setState({ error })
+        })        
+    }  
         
+    signOut(){
+        firebase.auth().signOut()
+    } 
+
     handleChange = e => {
         e.preventDefault(); //stops data appearing in url
         const { name, value } = e.target; //name=firstname or email etc
@@ -110,16 +77,61 @@ export default class SignUp extends Component {
         //const valueG  = e.target.value;   
         this.setState({
             userType: e.target.value.toLowerCase()
-        })  
-        //console.log("Dropdown: "+this.state.userType)
+        })
     }
-
-    //showID = () => {
-      //  return fbApp.auth.UserInfo.id
-    //}
     
     render() {
+       
         return (
+
+
+            <div className="row container"> 
+                <div className="col s12 signup" >
+                     <form onSubmit={this.submitForm}>
+                                
+                                <table className="signtable">
+                                <th><div className="row">
+                                <p>Sign Up</p>
+                                <p>Signing up allows you to save progress and for parents to monitor childrens process<br />Nice quick and easy!</p>
+                                </div></th>
+                                    <tr>
+                                  <td><label htmlFor="username">Name</label></td> 
+                                  <td> <input name="username" type="text" onChange={this.handleChange} /> <br /></td> 
+                                   </tr>
+                                   <tr>
+                                   <td> <label htmlFor="email">Email</label></td>
+                                   <td><input name="email" type="email" onChange={this.handleChange} /> <br /></td>
+                                   </tr>
+                                   <tr>
+                                   <td><label htmlFor="password">Password</label></td>
+                                   <td><input name="password" type="password" onChange={this.handleChange} /> <br /></td>
+                                   </tr>
+                                   
+                                   <tr>
+                                   <td><label>Account Type:</label></td> 
+                                    <td>
+                                    <select onChange={this.handleAdd}>
+                                        <option value="Child">Child</option>
+                                       <option value="Parent">Parent</option>
+                                    </select>
+                                        </td>
+                                   </tr>
+                                   
+                                   <div className="createAccount">
+                                   <td> <button className="btn waves-effect waves-light" type="submit" name="action">Submit<i className="material-icons right">send</i></button></td>
+                                   <td>  <small>Already Have an Account? Click here</small><br /></td>
+
+                                    <p>{this.state.error.message}</p> 
+                                   </div>
+                               </table>
+                          </form>
+                          </div>
+                      
+          </div> //one
+
+        
+        )
+        /*return (
             <div>
                 <p></p>
                 <section className="sign-up">
@@ -129,7 +141,7 @@ export default class SignUp extends Component {
                     </div>
                     <div className="row">
                         <div className="col span-2-of-2 box">
-                            <form onSubmit={this.handleSubmit}>
+                            <form onSubmit={this.submitForm}>
                                 <label htmlFor="username">Username</label>
                                 <input name="username" type="username" onChange={this.handleChange} /> <br />
 
@@ -151,12 +163,12 @@ export default class SignUp extends Component {
                                     <p>{this.state.error.message}</p>
                                 </div>
                             </form>
-                            {/* <button onClick={this.signOut}>Sign Out </button> */}
+                            <button onClick={this.signOut}>Sign Out </button> 
                         </div>
                     </div>
                 </section>
             </div>
-        )
+        )*/
     }
 }
 
@@ -233,3 +245,73 @@ export default class SignUp extends Component {
         // .catch(function(error) {
         //     console.error("Error, user account not created or user account not written into document: ", error);
         // });
+
+        
+        //this.signOut = this.signOut.bind(this)
+        //https://us-central1-education-app-976ac.cloudfunctions.net/helloWorld
+        //fetch()
+
+            //showID = () => {
+      //  return fbApp.auth.UserInfo.id
+    //}
+
+    // async handleSubmit(e) {
+    //     e.preventDefault();//return promises (firecast utube video)
+    //     const { username, email, password, userType } = this.state;
+
+    //     let UserCredential = await fbApp.auth().createUserWithEmailAndPassword(email, password)
+    //     .catch(error => {
+    //         this.setState({ error })
+    //     });
+    //     //if error then try to sign up you can't sign up
+    //     if(this.state.error.message == null){
+    //         let bob = await firestoreDB.collection("Users").doc(UserCredential.user.uid).set({
+    //             Type: userType,
+    //             name: username //might make it display name
+    //         })
+    //         if(this.state.userType == "child"){
+    //             let yas = await firestoreDB.collection("Children").doc(UserCredential.user.uid).set({
+    //                 name: username,
+    //                 email: email,
+    //                 age: null
+    //             })
+    //         }
+    //         else{
+    //             let sid = await firestoreDB.collection("Parent").doc(UserCredential.user.uid).set({
+    //                 name: username,
+    //                 email: email,
+    //                 children: []
+    //             })
+    //         }
+    //         try{
+    //             var doc = await fbApp.auth().onAuthStateChanged(function(user) {
+    //                 if(user) {
+    //                     var account = firestoreDB.collection("Users").doc(user.uid);
+    //                     account.get()
+    //                     .then(function(doc){
+    //                         if (doc.exists) {
+    //                             var accType = doc.data().Type 
+    //                             if(accType === "child"){
+    //                                 //console.log('new person signed up')
+    //                                 window.location.assign("/childdash")
+    //                             }
+    //                             else if(accType == "parent"){
+    //                                 window.location.assign("/adultdash")
+    //                             }
+    //                             else{
+    //                                 console.log("ERROR")
+    //                             }
+    //                         } 
+    //                         else {
+    //                             // doc.data() will be undefined in this case
+    //                             console.log("No such document!");
+    //                         }
+    //                     })
+    //                 }
+    //             })
+    //         }
+    //         catch(error){
+    //             console.log('NO CHANGE IN AUTH STATE') 
+    //         }
+    //     }
+    // }
