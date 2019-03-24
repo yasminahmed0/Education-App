@@ -2,57 +2,89 @@ import React, { Component } from 'react';
 import menu from '../../resources/css/img/menu.png';
 import logo from '../../resources/css/img/logo.png';
 import SemiCircleProgressBar from "react-progressbar-semicircle";
-import { fbApp, auth} from '../../../firebase';
+import firebase from '../../../firebase'
+import store from '../../../store'
+//import { fbApp, auth} from '../../../firebase';
 //import * as firebase from 'firebase' //tomorrow try
 //{/* https://www.npmjs.com/package/react-progressbar-semicircle */}
 
 
-//when this class/component loads, the constructor is called first 
 class ChildDashboard extends Component{
     constructor(props) {
         super(props);
-        this.state ={
-            uid: null,
-            email: null,
+    
+        let { account } = store.getState()
+        this.state = { 
+            uid: account.acc.user.uid,
+            email: account.acc.user.email,
+            username: null,
+            goal: null,
+            age: null,
             currentPassword: "",
             repeatedPassword: "",
             updatedPassword: ""
         }
-        fbApp.auth().onAuthStateChanged(function(user) {  
-            if(user){
-                console.log(user)
-                var currentuser = fbApp.auth().currentUser; //user
-                var uid = currentuser.uid
-                console.log("UID: "+uid)
+
+        console.log("Child Index.js "+account.acc.user.uid+" "+account.acc.user.email)
+        store.subscribe(() => {
+            const { data } = store.getState();
+            console.log("this is data: "+JSON.stringify(data))
+            if(data){
                 this.setState({
-                    uid: uid,
-                    email: currentuser.email
-                }) 
+                    username: data.name,
+                    age: data.age,
+                    goal: data.goal 
+                })    
+            }   
+        })
 
-            }
-            else{
-                window.location.assign("/")
-                // this.setState({
-                //     uid: "NO ID, NOT SIGNED IN OR BROKEN"
-                // })  
-            } 
-        }.bind(this))
         this.handleChange = this.handleChange.bind(this)
-
     }
         
     signOut(){
-        fbApp.auth().signOut()
-        console.log("User has been signed out")
+        firebase.auth().signOut()
+        window.location.assign("/")
     }
 
     handleChange = (e) => {
         const { name, value } = e.target;
-        //check if the same
-        this.setState({ [name]: value }) 
+        this.setState({ [name]: value }) //check if the same
     }
 
+    changePassword = () => {
+        var user = firebase.auth().currentUser 
+        var credential = firebase.auth.EmailAuthProvider.credential(user.email, this.state.currentPassword)
+         
+        user.reauthenticateAndRetrieveDataWithCredential(credential).then(function(user) {
+            user.updatePassword(this.state.updatedPassword).then(() => {
+                alert("Password succesfully changed")
+            }).catch((error) => {
+                alert("Cannot update :"+error.message)
+            })    
+        }).catch(function(error) {
+            alert(user.uid)
+            alert("second catch: "+error.message)
+        });
+        //second catch: Cannot read property 'state' of undefined
+    }
 
+    age(){
+        if(this.state.age === 0){
+           return "-"                     
+        }
+        else{
+            return this.state.age
+        }
+    }
+
+    goal(){
+        if(this.state.goal === ""){
+           return "Add a goal!"                     
+        }
+        else{
+            return this.state.goal
+        }
+    }
 
 	render(){
         const subjectdash = ['mathsdash' ,'englishdash']; //it is inside the render but outside the return section
@@ -68,7 +100,7 @@ class ChildDashboard extends Component{
                             <img className="logo" src={logo} alt="Swan academics"></img>
                         </div>
                         <div className="col span-2-of-4 subjectTitle">
-                            {"Siddika"/* Load students name into the title  */}  's Dashboard
+                            {this.state.username}'s Dashboard
                         </div>
                         <div><button onClick={this.signOut}>Sign Out </button></div>
                         <div className="col span-1-of-4">
@@ -85,12 +117,20 @@ class ChildDashboard extends Component{
                 <main>
                     <div className="dashContainer">
                     <div className="xxx">
-                        <div>{this.state.uid}</div>
+
+                        <div>UID: {this.state.uid}</div>
+                        <div>NAME: {this.state.username}</div>
+                        <div>EMAIL: {this.state.email}</div>
+                        <div>GOAL: {this.goal()}</div>
+                        <div>AGE: {this.age()}</div>
+                        
                         <div>
+                            <form>
                             <input type="password" name="currentPassword" placeholder="current password" onChange={this.handleChange}></input>
                             <input type="password" name="repeatedPassword" placeholder="new password" onChange={this.handleChange}></input>
                             <input type="password" name="updatedPassword"  placeholder="re-enter new password" onChange={this.handleChange}></input>
                             <button onClick={this.changePassword}>Update Password</button>
+                            </form>
                         </div>
                     </div>
 
@@ -161,22 +201,7 @@ export default ChildDashboard;
 
 
     //https://www.youtube.com/watch?v=2neoCVCrJYw
-    // changePassword = () => {
-    //     var user = fbApp.auth().currentUser 
-    //     var credential = firebase.auth.EmailAuthProvider.credential(user.email, this.state.currentPassword)
-         
-    //     user.reauthenticateAndRetrieveDataWithCredential(credential).then(function(user) {
-    //         user.updatePassword(this.state.updatedPassword).then(() => {
-    //             alert("Password succesfully changed")
-    //         }).catch((error) => {
-    //             alert("Cannot update :"+error.message)
-    //         })    
-    //     }).catch(function(error) {
-    //         alert(user.uid)
-    //         alert("second catch: "+error.message)
-    //     });
-    //     //second catch: Cannot read property 'state' of undefined
-    // }
+
 
 
         //return table
@@ -189,3 +214,36 @@ export default ChildDashboard;
         //     console.log("NO")
         //   // No user is signed in.
         // }
+
+        // firebase.auth().onAuthStateChanged(function(user) {  
+        //     if(user){
+        //         // console.log(user)
+        //         var currentuser = firebase.auth().currentUser; //user
+        //         var uid = currentuser.uid
+        //         console.log("UID: "+uid)
+        //         this.setState({
+        //             uid: uid,
+        //             email: currentuser.email
+        //         }) 
+
+        //     }
+        //     else{
+        //         window.location.assign("/")
+        //         // this.setState({
+        //         //     uid: "NO ID, NOT SIGNED IN OR BROKEN"
+        //         // })  
+        //     } 
+        // }.bind(this))
+
+        // getUser
+        // .then(user => {
+        //     console.log("UID: "+user.uid)
+        //     this.setState({
+        //         uid: user.uid,
+        //         email: user.email
+        //     })
+            
+        // })
+        // .catch((reject) => {
+        //     window.location.assign('/')
+        // })

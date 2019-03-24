@@ -1,17 +1,10 @@
 import React, { Component } from 'react'; //component is a function
-//import { fbApp } from '../firebase'; //imports const fbApp 
-
-import './resources/css/grid.css';
-import './resources/css/normalize.css';
-import './resources/css/style.css';
-
 import Header from './Header'
-import Footer from './Footer'
+//import Footer from './Footer'
 import Feedback from './Feedback'
 import HowItWorks from './HowItWorks'
 import Benefits from './Benefits'
-import Subjects from './Subjects'
-//import SignUp from './SignUp'
+import SignUp from './SignUp'
 import SignIn from './SignIn'
 
 //constructor is triggered by default.
@@ -30,45 +23,16 @@ class Base extends Component {
         }
     }
 
-    /*firebaseApp = fbApp.auth().onAuthStateChanged(function(user){
-        if (user) {
-            this.setState({
-                isLoggedIn: true
-            })
-        }
-    })*/
-
-
     render() {
-        /*const isLoggedIn = this.state.isLoggedIn;
-        let componentToDisplay;
-
-        componentToDisplay = isLoggedIn ? <SignUp /> : <SignUp />*/
-
         return (
-            <div className="cont">
-            <script src="slide.js"></script>
-                {/*  HEADER SECTION */}
+            <div>
                 <Header />
-
-                {/* <!-- HOW IT WORKS SECTION --> */}
-                <HowItWorks />
-
-                {/* BENEFITS OF SIGNING-UP SECTION  */}
-                <Benefits />
-
-                {/* SIGN IN OR SIGN UP }
-                {componentToDisplay} */}
                 <SignIn />
-
-                {/* SUBJECTS SECTION  */}
-                <Subjects />
-
-                {/* FEEDBACK SECTION  */}
+                <HowItWorks />
+                <Benefits />
+                <SignUp />
                 <Feedback />
-
-                {/* FOOTER  */}
-                <Footer />
+                {/* <Footer /> */}
             </div>
         );
     }

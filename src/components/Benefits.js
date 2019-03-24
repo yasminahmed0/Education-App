@@ -1,4 +1,63 @@
-import React, { Component } from 'react';
+
+import React, { Component } from 'react'; //component is a function
+import M from "materialize-css"; 
+import './resources/refined.css'
+
+
+
+
+class Benefits extends Component {
+    componentDidMount(){
+        M.AutoInit();
+    }
+   
+        
+
+    render() {
+        return (
+            <div className="container">
+                    <div className="section">
+
+                    <div className="row">
+                        <div className="col s12 m4">
+                        <div className="icon-block">
+                            <h2 className="center brown-text"><i className="material-icons">flash_on</i></h2>
+                            <h5 className="center">Strengths</h5>
+
+                            <p className="light">"See your strengths for all the topics combined in the chosen subject. These are based on how well you did in each topic game that you've played."</p>
+                        </div>
+                        </div>
+
+                        <div className="col s12 m4">
+                        <div className="icon-block">
+                            <h2 className="center brown-text"><i className="material-icons">group</i></h2>
+                            <h5 className="center">Progress</h5>
+
+                            <p className="light">"You, your teacher and parent can see your progress over time. "</p>
+                        </div>
+                        </div>
+
+                        <div className="col s12 m4">
+                        <div className="icon-block">
+                            <h2 className="center brown-text"><i className="material-icons">settings</i></h2>
+                            <h5 className="center">Feedback Reports</h5>
+
+                            <p className="light">"Get a written feedback report which you can print off to see what you need to work on."
+                            </p>
+                        </div>
+                        </div>
+                    </div>
+
+                    </div>
+                </div>
+
+
+                
+        );
+    }
+  }
+  export default Benefits;
+/*import React, { Component } from 'react';
 
 export default class Benefits extends Component {
 
@@ -48,4 +107,4 @@ export default class Benefits extends Component {
             </section>
         )
     }
-}
+}*/
