@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import logo from './resources/css/img/l.png';
 import M from "materialize-css"; 
-import './resources/refined.css'
+import './resources/refined2.css'
 
 
 export default class Header extends Component {
@@ -20,22 +20,24 @@ export default class Header extends Component {
     render() {
         return (
             <div>
-                <nav className="cyan darken-1" role="navigation">
-                    <div className="nav-wrapper container">
-                    <div id="logo-container x" ><img className="brand-logo left logo"src={logo} alt='logo'/></div>
-                    <ul className="right hide-on-med-and-down x">
-                    {this.state.info.map((item) => {
-                            return <li>{item} &nbsp; &nbsp; &nbsp;  </li> 
+                <nav className="teal lighten-2">
+                    <div className="nav-wrapper">
+                    <a href="#!" className="brand-logo"><img className="logo"src={logo} alt='logo'/></a>
+                    <a href="#!" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a> {/*warning, so added !*/}
+                     <ul className="right hide-on-med-and-down x">
+                    {this.state.info.map((item,key) => {
+                            return <li key={key}><a href={"#"+ item}>{item} &nbsp; &nbsp; &nbsp; </a> </li> 
                     })}
                     </ul>
-                    <ul id="nav-mobile" className="sidenav">
-                    {this.state.info.map((item) => {
-                            return <li>{item}</li>
-                    })}
-                    </ul>
-                    <a href="#" data-target="nav-mobile" className="sidenav-trigger"><i className="material-icons">menu</i></a>
+                    
                     </div>
                 </nav>
+
+                <ul className="sidenav" id="mobile-demo">
+                {this.state.info.map((item,key) => {
+                            return <li key={key}><a href={"#"+ item} teal-text="true" text-lighten-2="true">{item}</a></li>
+                    })}
+                </ul>
 
                 <div id="index-banner" className="parallax-container">
                     <div className="section no-pad-bot">
@@ -46,7 +48,7 @@ export default class Header extends Component {
                         <h5 className="header col s12 light">Learning the fun way</h5>
                         </div>
                         <div className="row center">
-                        <a href="http://materializecss.com/getting-started.html" id="download-button" className="btn-large waves-effect waves-light teal lighten-1">Sign Up</a>
+                        <a href="#Sign-Up" id="download-button" className="btn-large waves-effect waves-light teal lighten-1">Sign Up</a>
                         </div>
                         <br/>
 
@@ -54,7 +56,8 @@ export default class Header extends Component {
                     </div>
                     <div className="parallax"><img src="./background2.jpg" alt="Unsplashed background img 1"/></div>
                 </div>
-              </div>
+            </div>
+            
         );
     }
   }
@@ -102,4 +105,46 @@ export default class Header extends Component {
                 </header>
         )
     }
-}*/
+}
+
+latest:
+                <div>
+                <nav className="cyan darken-1" role="navigation">
+                    <div className="nav-wrapper container">
+                    <div id="logo-container x" ><img className="brand-logo left logo"src={logo} alt='logo'/></div>
+                    <ul className="right hide-on-med-and-down x">
+                    {this.state.info.map((item) => {
+                            return <li key={item.toString()}>{item} &nbsp; &nbsp; &nbsp;  </li> 
+                    })}
+                    </ul>
+                    <ul id="nav-mobile" className="sidenav">
+                    {this.state.info.map((item) => {
+                            return <li key={item.toString()}>{item}</li>
+                    })}
+                    </ul>
+                    <a href="#" data-target="nav-mobile" className="sidenav-trigger"><i className="material-icons">menu</i></a>
+                    </div>
+                </nav>
+
+                <div id="index-banner" className="parallax-container">
+                    <div className="section no-pad-bot">
+                    <div className="container">
+                        <br/>
+                        <h1 className="header center teal-text text-lighten-2">Swan Academics</h1>
+                        <div className="row center">
+                        <h5 className="header col s12 light">Learning the fun way</h5>
+                        </div>
+                        <div className="row center">
+                        <a href="http://materializecss.com/getting-started.html" id="download-button" className="btn-large waves-effect waves-light teal lighten-1">Sign Up</a>
+                        </div>
+                        <br/>
+
+                    </div>
+                    </div>
+                    <div className="parallax"><img src="./background2.jpg" alt="Unsplashed background img 1"/></div>
+                </div>
+              </div>
+
+
+
+*/

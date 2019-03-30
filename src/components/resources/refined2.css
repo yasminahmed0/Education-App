@@ -101,25 +101,3 @@ html {
          outline-color: cornflowerblue;
         
      }
-
-i.icon-dark-green {
-    color: #004d40;
-}
-
-h4 {
-    display: inline-block;
-    transition: 500ms;
-    border-bottom: 2.5px solid transparent;
-}
-  
-h4:hover {
-    border-color:#424242;
-}
-
-.forgot-password{
-    font-size: 100%;
-    font-family: inherit;
-    padding: 0;
-    border: 0;
-    color: #00acc1
-}

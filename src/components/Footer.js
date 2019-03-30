@@ -11,7 +11,17 @@ export default class Footer extends Component{
     }
     render(){
         return (
-            <footer>
+            <footer>    
+                <div className="footer-copyright  teal lighten-2  footer">
+                    <h6 className="grey-text text-darken-3 footertext">© 2019 Swan Academics </h6> 
+                </div>
+            </footer>
+        )
+    }
+}
+
+/*
+<footer>
             <div className="row">
                 <div className="col span-1-of-2">
                     <ul className="footer-nav">
@@ -41,8 +51,4 @@ export default class Footer extends Component{
             <div className="row">
                 <p> Copyright &copy; 2018 by Swan Academics. All rights reserved.</p>
             </div>
-            </footer>
-        )
-    }
-}
-
+            </footer> */

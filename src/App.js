@@ -10,14 +10,17 @@ import AdultDashboard from './components/Dashboards/AdultDashboard';
 import mixandmath from './components/Games/mixandmath'
 //import firebase from './firebase'
 //import { getUser } from './firebase'
+import Quiz from './components/Games/smallestSwan/QuizContainer'
 import store from './store'
 
 class App extends Component {
 //how many times is this refreshed and when it does, is the constructor refreshed too
 //whenever i sign out, this page is refreshed fully so contructor is called again
+
+//might need to place get store before this.state. check other componenent that use
     constructor(props){
         super(props)
-        
+        console.log("here3")
         this.state = {
             id: null,
             type: null
@@ -27,13 +30,15 @@ class App extends Component {
             const { account } = store.getState();
             //console.log("State: "+ JSON.stringify(store.getState()))
             //console.log("App.js user: "+JSON.stringify(account))
+            console.log("here4")
             if(account){
                 this.setState({
                     id: account.acc.user.uid,
                     type: account.acc.type
                 })
             }
-            else{
+            else{ //not always doin
+                console.log("here2")
                 if(window.location.pathname !== "/"){
                     window.location.href = "/"
                 }
@@ -43,7 +48,7 @@ class App extends Component {
 
     render() {
         var toDisplay
-        if(this.state.type !== null){
+        if(this.state.type !== null ){
             toDisplay = this.state.type === "child" ? ChildDash : AdultDashboard
         }
 
@@ -56,6 +61,7 @@ class App extends Component {
                     <Route path="/maths" component={Maths} />
                     <Route path="/dashboard" component={toDisplay} />
                     {/* {this.state.type == "parent"  ? <Route path="/adultdash" component={AdultDashboard}/> : <Route path="/childdash" component={ChildDash}/>} */}
+                    <Route path="/smallestSwan" component={Quiz}/> 
                     <Route path="/sob" component={mixandmath} />
                     <Route component={Error} />
                 </Switch>

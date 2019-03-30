@@ -1,6 +1,6 @@
 import React, { Component } from 'react'; //component is a function
 import Header from './Header'
-//import Footer from './Footer'
+import Footer from './Footer'
 import Feedback from './Feedback'
 import HowItWorks from './HowItWorks'
 import Benefits from './Benefits'
@@ -30,9 +30,9 @@ class Base extends Component {
                 <SignIn />
                 <HowItWorks />
                 <Benefits />
-                <SignUp />
                 <Feedback />
-                {/* <Footer /> */}
+                <SignUp />
+                <Footer />
             </div>
         );
     }
