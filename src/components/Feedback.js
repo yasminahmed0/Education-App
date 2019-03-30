@@ -42,18 +42,20 @@ export default class feedback extends Component {
 
     render(){
         return(
-            <div className="container">
+            <div className="container" id="Testimonials">
             <div className="section">
+            <div className="row"><h4 className="grey-text text-darken-3" >User Testimonials</h4></div>
 
             <div className="row">
 
             {
-                this.state.info.map((item) => {
+                this.state.info.map((item,key) => {
                     return (
-                        <div className="col s12 m4">
+                        <div key={key} className="col s12 m4">
                             <div className="icon-block">
                             <img src={item.image} alt="" className="circle responsive-img testimonal"/>
-                             <p className="light">{item.bq}</p>
+                             <p className="light ">{item.bq}</p>
+                             
                             <strong>{item.person}</strong> &nbsp; {item.school}
                          </div>
                         </div>
@@ -66,7 +68,9 @@ export default class feedback extends Component {
             </div>
 
             </div>
+            <div className="divider"></div>
         </div>
+            
             
         )
     }

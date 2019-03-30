@@ -7,16 +7,21 @@ import M from "materialize-css";
 import firebase from '../../../firebase';
 import store from '../../../store'
 import $ from 'jquery';
+import '../../resources/refined.css'
 //import SemiCircleProgressBar from "react-progressbar-semicircle";
 //{/* https://www.npmjs.com/package/react-progressbar-semicircle */}
 //import { FieldValue } from '@google-cloud/firestore'
 
+//when a child is added cos back to store and output states, 
+//why not just it in this file?
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import "react-tabs/style/react-tabs.css";
 
 class AdultDashboard extends Component{ 
 
     constructor(props) {
         super(props);
-        
+       
         //initial account details
         let { account } = store.getState()
         this.state = {
@@ -24,9 +29,10 @@ class AdultDashboard extends Component{
             email: account.acc.user.email,
             username: null,
             children:[],
-            newValue: null,
-            childrenNames: [],
-            haveChildren: false
+            newValue: null, //new child to add
+            childrenNames: [], //list of children's names
+            products: [],
+            loaded: false
         }
     
         //data from database. Need to call getState again to get new dispatch called in store
@@ -38,88 +44,225 @@ class AdultDashboard extends Component{
                 this.setState({
                     username: data.name,
                     children: data.children,
-                    childrenNames: data.childrenNames
+                    childrenNames: data.childrenNames,
+                    products: data.products
                 })    
             }   
         })
-        console.log("state: "+this.state.childrenNames)
+        //console.log("state: "+this.state.childrenNames)
         this.addChild = this.addChild.bind(this)
     }
 
-    componentDidMount(){
+     componentDidMount(){
         M.AutoInit();
+        
+        this.setState({loaded: true})
+
         $(".links").click(function(){
-            $(".divs:visible").hide();
+            $(".divs:visible").hide(); //hide whats currently visible
             $("#"+$(this).attr("data-showdiv")).show();
         });
+        // $(function(){
+        //     $('.tabs').tabs();
+        //   });
+        
+
     }
 
     handleAdd = e => {
         e.preventDefault() //removed name
-        const { value} = e.target //video
+        const { name, value} = e.target //video
         console.log("e.target value: "+value)
-        //if(value != null){
+        if(name === "insert"){
             this.setState({
                 newValue: value
             })  
             console.log("State value: "+this.state.newValue)
-       //}
+        }
+        else{
+            this.setState({
+                username: value
+            })
+            console.log("chaning username to: "+this.state.username)
+        }
         
+    }
+
+    changeName = e => {
+        e.preventDefault()
+        if(this.state) 
+        firebase.firestore().collection("Parent").doc(this.state.uid).update({
+            name: this.state.username
+        })
+        .then(doc => {
+            alert("Name successfully updated!")
+            firebase.firestore().collection("Users").doc(this.state.uid).update({
+                name: this.state.username
+            })
+        })
     }
 
     addChild() {
         if(this.state.uid != null ){
-            console.log("UID is not null " + this.state.uid)
-            if(this.state.newValue != null){
-                var ref = firebase.firestore().collection("Parent").doc(this.state.uid)
-                ref.update({
-                    children: firebase.firestore.FieldValue.arrayUnion(this.state.newValue)
+            //console.log("UID is not null " + this.state.uid)
+            if(this.state.newValue !== "" && this.state.newValue !== null){
+                const db = firebase.firestore()
+                //check if doc is present before adding
+                db.collection("Children").doc(this.state.newValue).get()
+                .then(doc => {
+                    console.log(this.state.newValue)
+                    if(doc.exists){
+                        const ref = db.collection("Parent").doc(this.state.uid)
+                        ref.update({
+                            children: firebase.firestore.FieldValue.arrayUnion(this.state.newValue)
+                        })
+                    }
+                    else{
+                        console.log("index: child does not exist")
+                        alert("index: child does not exist")
+                    }
                 })
             }
             else{
-                alert("Cannot be empty")
+                alert("Please enter an ID value")
             }
         } 
         //window.location.reload(); this did not work. NEED TO REFRESH 
     }
 
-    //signs user out then redirects them back to base page
     signOut(){
         firebase.auth().signOut()
         window.location.assign("/")
     }
 
-    printChildren(){
-        this.state.children.map((child,index) => {
-            return (<div key={index.toString()}>
-                <p>{child}</p>
-            </div>)
-        })
-        //firebase.firestore().collection("Children").S
-    }
-
-    getChildren(){
-        //query children from children column
-        const list = []
-        const ref = firebase.firestore().collection("Children")
-        this.state.children.map((item, key) => {
-            console.log("item: "+item)
-            ref.doc(item).get().
-            then(doc => {
-                console.log("name "+doc.data().name)
-                list.push(doc.data().name)
-            })
-        })
-        //console.log("this is list: "+list)
-        return list
-        //then set state to name or return array of name
+    content(){
+        
+        
     }
 
     render() {
-       // console.log("Function return: "+this.getChildren())
-        //console.log("state: "+this.state.childrenNames)
-        const email=this.state.email
+        //const email =this.state.emaail
         return (
+            <div>
+            <div><button onClick={this.signOut}>Sign Out </button></div>
+            <div>
+                {console.log("dash: "+JSON.stringify(this.state.products))}
+                {this.state.products.map((item,key)=>{
+                    return <div key={key}>
+                        <hr></hr>
+                        <div>Child ID: {item.childID}</div>
+                        <div>Child Name: {item.childName}</div>
+                        <div>{item.Games.map((item2, key) => {
+                            return <div key={key}>
+                                    
+                                    <p>GameID: {item2.gameID}</p>
+                                    <p>Subject: {item2.Subject}</p>
+                                    <p>Title: {item2.title}</p>
+                                    <p>Score: {item2.score}</p>
+                                    <p>NCP: {item2.ncp}</p>
+                                    {/* <p key={key}>{item2.date}</p> */}
+                                    
+                                </div>
+                        })}</div>
+                        
+                    </div>
+                    
+                })}
+                <hr></hr>
+                {/*Object.keys(product.phones).map((phone, index) =>
+                <li key={index}>{product.phones[phone].brand} - {product.phones[phone].model}</li>
+                )
+               
+                
+                
+                */}
+                </div>
+                <div className="container childdashcon">
+                    <div className="section"></div>
+                        <div className="row ">
+                            <div className="col s2"><a id="logo-container x" href="#!" ><img className="brand-logo left logo"src={logo} alt='logo'/></a></div>
+                            <div className="col s2 offset-s2 adultDashTitle"> Parent Dashboard </div>
+                        </div>
+                        <div className="row dashboard xy"> 
+                       
+                        <Tabs>
+                        <TabList>
+                        <Tab>Welcome</Tab>   
+                        {this.state.childrenNames.map((item,key) =>{
+                            return <Tab>{item}</Tab>
+                        })}   
+                        <Tab><i className="material-icons right">settings</i>Settings</Tab>
+                        </TabList>
+                        <TabPanel>
+                            Heres how it works 
+                        </TabPanel>
+                        
+                            
+                        
+                        {this.state.childrenNames.map((item,key) =>{
+                            return(
+                                <TabPanel>
+                                     <div>{item}</div>
+                                </TabPanel>
+                               
+                                // <TabPanel>
+                                //     <Tabs>
+                                //         <TabList>
+                                //         <Tab>Math</Tab>
+                                //         <Tab>English</Tab>
+                                //         </TabList>
+                                    
+                                //         <TabPanel>
+                                //             <h4>{item}'s Math Games</h4>
+                                //         </TabPanel>
+
+                                //         <TabPanel>
+                                //             <h4>{item}'s English Games</h4>
+                                //         </TabPanel>
+                                //     </Tabs>
+                                // </TabPanel>
+                            )
+                        })} 
+                        <TabPanel>
+                        <form className="col s12">
+                            <div className="input-field col s12"><input placeholder="Edit name" id="name" type="text" className="validate"/></div>
+                                                        
+                            <div className="input-field col s12"><input disabled value="email" id="disabled" type="text" className="validate"/>    </div>
+                                    
+                            <div className="input-field col s12"><input placeholder="update password" id="password" type="password" className="validate"/></div>
+                                                        
+                            <div className="input-field col 2"><button className="btn waves-effect waves-light" type="submit" name="action">Submit<i className="material-icons right">chevron_right</i></button></div>
+                                                        
+                            <div className="input-field col 2">
+                                <button className="waves-effect waves-light btn modal-trigger" href="#addAChild" >Add a Child
+                                    <i className="material-icons right">person_add</i>
+                                </button>
+                                </div>
+                                
+                                </form> 
+                                
+                        </TabPanel>
+                        </Tabs>
+                            <div id="addAChild" className="modal">
+                                <div className="modal-content">
+                                    <form><label >Insert your childs ID</label><input type="text" className="validate" name="insert" onChange={this.handleAdd}/>  </form>   
+                                </div>
+                                <div className="modal-footer col 12">
+                                    <a href="#!" className="modal-close waves-effect waves-green btn-flat col 6">Cancel</a>
+                                    <a href="#!" className="modal-close waves-effect waves-green btn-flat col 6" onClick={this.addChild}>Add</a>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+         )}
+        
+        }
+
+        export default AdultDashboard;
+
+    /**
+      </div>
             <div>
                 <div><button onClick={this.signOut}>Sign Out </button></div>
                 <div className="container childdashcon">
@@ -131,70 +274,314 @@ class AdultDashboard extends Component{
                         <div className="row dashboard xy">
                             <div className="col s3">
                                 <ul id="slide-out" className="side-nav fixed">
-                                    {this.state.childrenNames.map((item,key) => {
-                                        return (<div>
-                                                    <li><div ><a className="waves-effect links sidenavop" id={"Link"+key} data-showdiv={"Div"+key}><i className="material-icons right">person_outline</i>{item}</a></div></li>
-                                                    <li><div className="divider"></div></li>
-                                                </div>)})}
-                                    <li><div ><a className="waves-effect links sidenavop" id="LinkSettings" xs data-showdiv={"DivSettings"}><i className="material-icons right">settings</i>Settings</a></div></li>
+                                    <li><div><a className="waves-effect links sidenavop" id="LinkWorks" data-showdiv={"DivWorks"}><i className="material-icons right">keyboard_arrow_right</i>How does it work?</a></div></li>
                                     <li><div className="divider"></div></li>
-                                    <li><div ><a className="waves-effect links sidenavop" id="LinkUsefulLink" data-showdiv={"DivUsefulLink"}><i className="material-icons right">links</i>Useful Links</a></div></li>
+                                   
+                                    {this.state.childrenNames.map((item,key) => {
+                                        return (<div key={key}>
+                                                    <li ><div ><a className="waves-effect links sidenavop" id={"Link"+key} data-showdiv={"Div"+key}><i className="material-icons right">person_outline</i>{item}</a></div></li> 
+                                                    <li><div className="divider"></div></li>
+                                                </div>  
+                                            )})}
+                                    <li><div><a className="waves-effect links sidenavop" id="LinkSettings" xs="true" data-showdiv={"DivSettings"}><i className="material-icons right">settings</i>Settings</a></div></li>
+                                    <li><div className="divider"></div></li>
+                                    <li><div><a className="waves-effect links sidenavop" id="LinkUsefulLink" data-showdiv={"DivUsefulLink"}><i className="material-icons right">links</i>Useful Links</a></div></li>
                                 </ul>
                             </div>
-                            <div className="col s9">
-                                {this.state.childrenNames.map((item,key) => {
-                                    return (<div id={"Div"+key} className="divs" style={{display:'none'}}>{item}
-                                                <div className="row ">
-                                                    <div className="col s12">
-                                                        <ul className="tabs">
+                            <div className="col s9" >
+                                        
+                                    <div>
+                                    {this.state.childrenNames.map((item,key) =>{
+                                        return(
+                                            <div   >
+                                                
+                                                <Tabs className="divs" >
+                                                <div id={"Div"+key} style={{display:'none'}}>
+                                                    <TabList >
+                                                        <Tab>Math</Tab>
+                                                        <Tab>English</Tab>
+                                                    </TabList>
+                                                
+                                                    <TabPanel>
+                                                        <h4>{item}'s Math Games</h4>
+                                                    </TabPanel>
+
+                                                    <TabPanel>
+                                                        <h4>{item}'s English Games</h4>
+                                                    </TabPanel>
+                                                </div>
+                                                   
+                                               </Tabs>
+                                            </div>  )})} 
+                                        </div>
+                                   
+                                        
+                                        <div id="DivWorks" className="divs"> 
+                                            <p>Welcome to your Dashboard!</p>
+                                        </div>
+                                        <div id="DivSettings" className="divs" style={{display:'none'}}>
+                                            <form className="col s12" onSubmit={this.changeName}>
+                                                <div className="input-field col s12"><input placeholder={this.state.username} id="name" type="text" className="validate" onChange={this.handleAdd}/></div>
+                                                
+                                                <div className="input-field col s12"><input disabled value={email} id="disabled" type="text" className="validate"/>    </div>
+                            
+                                                <div className="input-field col s12"><input placeholder="update password" id="password" type="password" className="validate"/></div>
+                                                
+                                                <div className="input-field col 2"><button className="btn waves-effect waves-light" type="submit">Submit<i className="material-icons right">chevron_right</i></button></div>
+                                                
+                                                <div className="input-field col 2">
+                                                    <button className="waves-effect waves-light btn modal-trigger" href="#addAChild" type="submit" name="action">Add a Child
+                                                    <i className="material-icons right">person_add</i>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                            <div id="addAChild" className="modal">
+                                                <div className="modal-content">
+                                                    <form><label htmlFor="childUserID">Insert your childs ID</label><input id="childUserID" type="text" className="validate" name="insert" onChange={this.handleAdd}/>  </form>   
+                                                </div>
+                                                    <div className="modal-footer col 12">
+                                                        <a href="#!" className="modal-close waves-effect waves-green btn-flat col 6">Cancel</a>
+                                                        <button className="modal-close waves-effect waves-green btn-flat col 6" onClick={this.addChild}>Add</button>
+                                                    </div>
+                                            </div>
+                                        </div> {/* id=DivSetting  
+                                        <div id="DivUsefulLink" className="divs" style={{display:'none'}}>Useful Links</div>
+                                    
+                                        </div> {/* col s9 
+                                    </div> {/* row dashboar xy div 
+                                </div> {/* section div 
+                            </div> {/* container div
+                        </div> 
+                    
+     */
+    /*  render() {
+        const email=this.state.email
+        // console.log("render call "+this.state.childrenNames)
+        const kid = []
+        const num  = this.state.childrenNames.length
+        if(num !== 0){
+            for(let i=0; i<this.state.childrenNames.length; i++){
+                kid.push(this.state.childrenNames[i])
+            }
+        }
+
+        if(this.state.childrenNames != null){
+            return(<div>Loading</div>)
+        }
+        else{
+            return(
+       
+                <div className="row container"> 
+                <div className="signup">
+                <div className="col s12 ">
+                  <ul className="tabs">
+                  {this.state.childrenNames.map((item) =>{
+                      return(
+                          
+                    <li className="tab col s6 "><a  className="active " href={"#"+item}>{item}</a></li>
+    
+                      )})}
+                </ul>
+                </div>
+                {this.state.childrenNames.map((item) => {
+                                return (
+                                    <div id={item} className="col s12 ">
+                                    {item}
+                                    
+                                    </div>
+                                )
+                                })}
+                  </div>
+              </div>   
+            )
+        }
+    }*/ 
+
+
+
+/*
+      <div><button onClick={this.signOut}>Sign Out </button></div>
+                <div className="container childdashcon">
+                    <div className="section"></div>
+                        <div className="row ">
+                            <div className="col s2"><a id="logo-container x" href="#" ><img className="brand-logo left logo"src={logo} alt='logo'/></a></div>
+                            <div className="col s2 offset-s2 adultDashTitle"> Parent Dashboard </div>
+                        </div>
+                        <div className="row dashboard xy"> 
+                       
+                        <Tabs>
+                        <TabList>
+                        <Tab>Welcome</Tab>   
+                        {this.state.childrenNames.map((item,key) =>{
+                            return <Tab>{item}</Tab>
+                        })}   
+                        <Tab><i className="material-icons right">settings</i>Settings</Tab>
+                        </TabList>
+                        <TabPanel>
+                            Heres how it works 
+                        </TabPanel>
+                        {this.state.childrenNames.map((item,key) =>{
+                            return(
+                                <TabPanel>
+                                    <Tabs>
+                                        <TabList>
+                                        <Tab>Math</Tab>
+                                        <Tab>English</Tab>
+                                        </TabList>
+                                    
+                                        <TabPanel>
+                                            <h4>{item}'s Math Games</h4>
+                                        </TabPanel>
+
+                                        <TabPanel>
+                                            <h4>{item}'s English Games</h4>
+                                        </TabPanel>
+                                    </Tabs>
+                                </TabPanel>
+                            )
+                        })} 
+                        <TabPanel>
+                        <form className="col s12">
+                            <div className="input-field col s12"><input placeholder="Edit name" id="name" type="text" className="validate"/></div>
+                                                        
+                            <div className="input-field col s12"><input disabled value="email" id="disabled" type="text" className="validate"/>    </div>
+                                    
+                            <div className="input-field col s12"><input placeholder="update password" id="password" type="password" className="validate"/></div>
+                                                        
+                            <div className="input-field col 2"><button className="btn waves-effect waves-light" type="submit" name="action">Submit<i className="material-icons right">chevron_right</i></button></div>
+                                                        
+                            <div className="input-field col 2">
+                                <button className="waves-effect waves-light btn modal-trigger" href="#addAChild" >Add a Child
+                                    <i className="material-icons right">person_add</i>
+                                </button>
+                                </div>
+                                
+                                </form> 
+                                
+                        </TabPanel>
+                        </Tabs>
+                            <div id="addAChild" className="modal">
+                                <div className="modal-content">
+                                    <form><label >Insert your childs ID</label><input type="text" className="validate" name="insert" onChange={this.handleAdd}/>  </form>   
+                                </div>
+                                <div className="modal-footer col 12">
+                                    <a href="#!" className="modal-close waves-effect waves-green btn-flat col 6">Cancel</a>
+                                    <a href="#!" className="modal-close waves-effect waves-green btn-flat col 6" onClick={this.addChild}>Add</a>
+                                </div>
+                            </div>
+            </div>
+            </div>
+            
+            </div>
+             */
+
+
+
+/*
+return (
+            <div>
+                <div><button onClick={this.signOut}>Sign Out </button></div>
+                <div className="container childdashcon">
+                    <div className="section">
+                        <div className="row ">
+                            <div className="col s2"><a id="logo-container x" href="#" ><img className="brand-logo left logo"src={logo} alt='logo'/></a></div>
+                            <div className="col s2 offset-s2 adultDashTitle"> Parent Dashboard </div>
+                        </div>
+                        <div className="row dashboard xy">
+                            <div className="col s3">
+                                <ul id="slide-out" className="side-nav fixed">
+                                    <li><div><a className="waves-effect links sidenavop" id="LinkWorks" data-showdiv={"DivWorks"}><i className="material-icons right">keyboard_arrow_right</i>How does it work?</a></div></li>
+                                    <li><div className="divider"></div></li>
+                                   
+                                    {kid.map((item,key) => {
+                                        return (<div key={key}>
+                                                    <li ><div ><a className="waves-effect links sidenavop" id={"Link"+key} data-showdiv={"Div"+key}><i className="material-icons right">person_outline</i>{item}</a></div></li> 
+                                                    <li><div className="divider"></div></li>
+                                                </div>  
+                                            )})}
+                                    <li><div><a className="waves-effect links sidenavop" id="LinkSettings" xs="true" data-showdiv={"DivSettings"}><i className="material-icons right">settings</i>Settings</a></div></li>
+                                    <li><div className="divider"></div></li>
+                                    <li><div><a className="waves-effect links sidenavop" id="LinkUsefulLink" data-showdiv={"DivUsefulLink"}><i className="material-icons right">links</i>Useful Links</a></div></li>
+                                </ul>
+                            </div>
+                            <div className="col s9" >
+                                        {this.state.childrenNames.map((item,key) => {
+                                            return <div key={key} id={"Div"+key} className="divs" style={{display:'none'}}> {item}
+                                                 <div className="row" > 
+                                                    <div className="col s12" >
+                                                        <ul className="tabs" > 
                                                             <li className="tab col s6"><a href="#Maths">Maths</a></li>
                                                             <li className="tab col s6"><a href="#English">English</a></li>
                                                         </ul>
-                                                        <div id="Maths" className="col s12" >{"Maths" }</div>
-                                                        <div id="English" className="col s12">{"English"}</div>
+                                                        <div id="Maths" className="col s12" >Maths</div>
+                                                        <div id="English" className="col s12">English</div>
+                                                    </div>    
+                                                </div>
+                                            </div>
+                                            })
+                                        }
+                                    <div>
+                                         {/* {this.state.childrenNames.map((item,key) => {
+                                            return (<div key={key} id={"Div"+key} className="divs" style={{display:'none'}}> {item}
+                                                <div className="row" > 
+                                                    <div className="col s12" >
+                                                        <ul className="tabs" > 
+                                                            <li className="tab col s6"><a href="#Maths">Maths</a></li>
+                                                            <li className="tab col s6"><a href="#English">English</a></li>
+                                                        </ul>
+                                                        <div style={{display:'none'}}>
+                                                        <div id="Maths" className="col s12" >Maths</div>
+                                                        <div id="English" className="col s12">English</div>
+                                                        </div>
                                                     </div>                                   
                                                 </div>
                                                 <div className="input-field col 2">
                                                     <button className="waves-effect waves-light btn modal-trigger" href="#removeAChild" type="submit" name="action"> Remove Child<i className="material-icons right">clear</i></button>
                                                 </div>
-                                        </div>)})}
-                                    <div id="DivSettings" className="divs" style={{display:'none'}}>
-                                        <form className="col s12">
-                                            <div className="input-field col s12"><input placeholder="Edit name" id="name" type="text" className="validate"/></div>
-                                            
-                                            <div className="input-field col s12"><input disabled value={email} id="disabled" type="text" className="validate"/>    </div>
-                        
-                                            <div className="input-field col s12"><input placeholder="update password" id="password" type="password" className="validate"/></div>
-                                            
-                                            <div className="input-field col 2"><button className="btn waves-effect waves-light" type="submit" name="action">Submit<i className="material-icons right">chevron_right</i></button></div>
-                                            
-                                            <div className="input-field col 2">
-                                                <button className="waves-effect waves-light btn modal-trigger" href="#addAChild" type="submit" name="action">Add a Child
-                                                <i className="material-icons right">person_add</i>
-                                                </button>
-                                            </div>
-                                        </form>
-                                        <div id="addAChild" className="modal">
-                                            <div className="modal-content">
-                                                <form><label for="childUserID">Insert your childs ID</label><input id="childUserID" type="text" className="validate"/>  </form>   
-                                            </div>
-                                                <div className="modal-footer col 12">
-                                                    <a href="#!" className="modal-close waves-effect waves-green btn-flat col 6">Cancel</a>
-                                                    <a href="#!" className="modal-close waves-effect waves-green btn-flat col 6">Add</a>
-                                                </div>
+                                        </div>)})} 
                                         </div>
-                                    </div> {/* id=DivSetting */}
-                                <div id="DivUsefulLink" className="divs" style={{display:'none'}}>Useful Links</div>
-                            </div> {/* col s9 */}
-                        </div> {/* row dashboar xy div */}
-                    </div> {/* section div */}
-                </div> {/* container div */}
-            </div> //return div
-        );
-    }
-}
+                                   
+                                        
+                                        <div id="DivWorks" className="divs"> {/*style={{display:'none'}}
+                                            <p>Welcome to your Dashboard!</p>
+                                        </div>
+                                        <div id="DivSettings" className="divs" style={{display:'none'}}>
+                                            <form className="col s12" onSubmit={this.changeName}>
+                                                <div className="input-field col s12"><input placeholder={this.state.username} id="name" type="text" className="validate" onChange={this.handleAdd}/></div>
+                                                
+                                                <div className="input-field col s12"><input disabled value={email} id="disabled" type="text" className="validate"/>    </div>
+                            
+                                                <div className="input-field col s12"><input placeholder="update password" id="password" type="password" className="validate"/></div>
+                                                
+                                                <div className="input-field col 2"><button className="btn waves-effect waves-light" type="submit">Submit<i className="material-icons right">chevron_right</i></button></div>
+                                                
+                                                <div className="input-field col 2">
+                                                    <button className="waves-effect waves-light btn modal-trigger" href="#addAChild" type="submit" name="action">Add a Child
+                                                    <i className="material-icons right">person_add</i>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                            <div id="addAChild" className="modal">
+                                                <div className="modal-content">
+                                                    <form><label htmlFor="childUserID">Insert your childs ID</label><input id="childUserID" type="text" className="validate" name="insert" onChange={this.handleAdd}/>  </form>   
+                                                </div>
+                                                    <div className="modal-footer col 12">
+                                                        <a href="#!" className="modal-close waves-effect waves-green btn-flat col 6">Cancel</a>
+                                                        <button className="modal-close waves-effect waves-green btn-flat col 6" onClick={this.addChild}>Add</button>
+                                                    </div>
+                                            </div>
+                                        </div> {/* id=DivSetting 
+                                    <div id="DivUsefulLink" className="divs" style={{display:'none'}}>Useful Links</div>
+                                    
+                                </div> {/* col s9 
+                            </div> {/* row dashboar xy div 
+                        </div> {/* section div 
+                    </div> {/* container div
+                </div> 
+            );
+*/
 
-export default AdultDashboard;
+
 
 /*render(){
         const childs=['Alice','Ben','Caleb'];
@@ -228,7 +615,7 @@ export default AdultDashboard;
                     })}</div>
                     <div>
                         Names: {this.printChildren()}
-                    </div>
+                    </div> 
                     <div><br></br></div>
                     <div>Add Child:
                         <input type="text" onChange={this.handleAdd}></input>
@@ -316,3 +703,4 @@ export default AdultDashboard;
         //         window.location.assign("/")
         //     } 
         // }.bind(this))
+

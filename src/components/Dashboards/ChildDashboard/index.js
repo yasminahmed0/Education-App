@@ -20,9 +20,7 @@ class ChildDashboard extends Component{
             username: null,
             goal: null,
             age: null,
-            currentPassword: "",
-            repeatedPassword: "",
-            updatedPassword: ""
+            gameData: []
         }
 
         console.log("Child Index.js "+account.acc.user.uid+" "+account.acc.user.email)
@@ -33,7 +31,8 @@ class ChildDashboard extends Component{
                 this.setState({
                     username: data.name,
                     age: data.age,
-                    goal: data.goal 
+                    goal: data.goal,
+                    gameData: data.gameProgress
                 })    
             }   
         })
@@ -51,23 +50,7 @@ class ChildDashboard extends Component{
         this.setState({ [name]: value }) //check if the same
     }
 
-    changePassword = () => {
-        var user = firebase.auth().currentUser 
-        var credential = firebase.auth.EmailAuthProvider.credential(user.email, this.state.currentPassword)
-         
-        user.reauthenticateAndRetrieveDataWithCredential(credential).then(function(user) {
-            user.updatePassword(this.state.updatedPassword).then(() => {
-                alert("Password succesfully changed")
-            }).catch((error) => {
-                alert("Cannot update :"+error.message)
-            })    
-        }).catch(function(error) {
-            alert(user.uid)
-            alert("second catch: "+error.message)
-        });
-        //second catch: Cannot read property 'state' of undefined
-    }
-
+   
     age(){
         if(this.state.age === 0){
            return "-"                     
@@ -123,15 +106,18 @@ class ChildDashboard extends Component{
                         <div>EMAIL: {this.state.email}</div>
                         <div>GOAL: {this.goal()}</div>
                         <div>AGE: {this.age()}</div>
-                        
-                        <div>
-                            <form>
-                            <input type="password" name="currentPassword" placeholder="current password" onChange={this.handleChange}></input>
-                            <input type="password" name="repeatedPassword" placeholder="new password" onChange={this.handleChange}></input>
-                            <input type="password" name="updatedPassword"  placeholder="re-enter new password" onChange={this.handleChange}></input>
-                            <button onClick={this.changePassword}>Update Password</button>
-                            </form>
+                        <div>Game Data: {this.state.gameData.map((item, key) => {
+                                return(<div key={key}>
+                                        <p>Game ID: {item.gameID}</p>
+                                        <p>Subject: {item.Subject}</p>
+                                        <p>score: {item.score}</p>
+                                        <p>NCP: {item.ncp}</p>
+                                        <p>date: {item.date}</p>
+                                        <hr></hr>
+                                    </div>)
+                            })}
                         </div>
+                       
                     </div>
 
                     <section className="dashboard-subjects">
@@ -175,16 +161,6 @@ class ChildDashboard extends Component{
                 </div>
     </main>
     <footer className="ft">
-        <div className="row ">
-            <div className="col span-1-of-1">
-                <ul className="footer-nav">
-                    <li><a href="App.js">About us</a></li>
-                    <li><a href="App.js">Contact us</a></li>
-                    <li><a href="App.js">Terms of service</a></li>
-                    <li><a href="App.js">Privacy policy</a></li>
-                </ul>
-            </div>
-        </div>
         <div className="row">
             <p>
                 Copyright &copy; 2018 by Swan academics. All rights reserved.
@@ -247,3 +223,24 @@ export default ChildDashboard;
         // .catch((reject) => {
         //     window.location.assign('/')
         // })
+
+/**
+ *  changePassword = () => {
+        var user = firebase.auth().currentUser 
+        var credential = firebase.auth.EmailAuthProvider.credential(user.email, this.state.currentPassword)
+         
+        user.reauthenticateAndRetrieveDataWithCredential(credential).then(function(user) {
+            user.updatePassword(this.state.updatedPassword).then(() => {
+                alert("Password succesfully changed")
+            }).catch((error) => {
+                alert("Cannot update :"+error.message)
+            })    
+        }).catch(function(error) {
+            alert(user.uid)
+            alert("second catch: "+error.message)
+        });
+        //second catch: Cannot read property 'state' of undefined
+    }
+
+
+ */
