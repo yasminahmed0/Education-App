@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import logo from './resources/css/img/l.png';
-import logo2 from './resources/css/img/logo2.png';
 import logo5 from './resources/css/img/logo5.png';
 import M from "materialize-css"; 
 import './resources/refined.css'

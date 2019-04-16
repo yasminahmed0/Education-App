@@ -83,6 +83,10 @@ border-bottom: transparent !important;
 text-align: left;
 }
 
+.feedbackFont{
+  font-size: 24px;
+}
+
 /*-------------------------------------------------*/
 /*----------------Child Dashboard------------------*/
 /*-------------------------------------------------*/
