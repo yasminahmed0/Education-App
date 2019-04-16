@@ -458,24 +458,16 @@ class AdultDashboard extends Component{
                               
                                    <tbody className="spectablebody">
                                        <tr>
-                                           <td>2.1 </td>
-                                           <td> Understanding Division and multiplication and being able to carry out mental arithmatic </td>
+                                           <td>1.1 </td>
+                                           <td> Basic knowledge of Addition and Substraction but displays difficulties with use of double digits. </td>
                                        </tr>
                                        <tr>
-                                           <td>2.2 </td>
-                                            <td> Understanding Division and multiplication and being able to carry out mental arithmatic </td>
+                                           <td>1.2 </td>
+                                            <td> Strong knowledge of Addition and Substraction and being able to carry out mental arithmatic. </td>
                                        </tr>
                                        <tr>
-                                           <td>2.3 </td>
-                                           <td> Understanding Division and multiplication and being able to carry out mental arithmatic </td>
-                                       </tr>
-                                       <tr>
-                                           <td>2.4 </td>
-                                           <td> Understanding Division and multiplication and being able to carry out mental arithmatic </td>
-                                       </tr>
-                                       <tr>
-                                           <td>2.5 </td>
-                                           <td> Understanding Division and multiplication and being able to carry out mental arithmatic </td>
+                                           <td>1.3 </td>
+                                           <td> Beginners understanding of Division and multiplication and strong mental arithmatic. </td>
                                        </tr>
                                    </tbody>
                                </table>
@@ -486,23 +478,15 @@ class AdultDashboard extends Component{
                                    <tbody className="spectablebody">
                                        <tr>
                                            <td>2.1 </td>
-                                           <td> Understanding Division and multiplication and being able to carry out mental arithmatic </td>
+                                           <td> Beginners understanding of the correct use of full stops, work needed to improve knowledge. </td>
                                        </tr>
                                        <tr>
                                            <td>2.2 </td>
-                                            <td> Understanding Division and multiplication and being able to carry out mental arithmatic </td>
+                                            <td> Good understanding of full stops with basic knowledge on use of apostrophes. </td>
                                        </tr>
                                        <tr>
                                            <td>2.3 </td>
-                                           <td> Understanding Division and multiplication and being able to carry out mental arithmatic </td>
-                                       </tr>
-                                       <tr>
-                                           <td>2.4 </td>
-                                           <td> Understanding Division and multiplication and being able to carry out mental arithmatic </td>
-                                       </tr>
-                                       <tr>
-                                           <td>2.5 </td>
-                                           <td> Understanding Division and multiplication and being able to carry out mental arithmatic </td>
+                                           <td> High level of spelling, firm understanding of the use of full stops. </td>
                                        </tr>
                                    </tbody>
                                </table>

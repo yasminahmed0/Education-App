@@ -413,8 +413,8 @@ class ChildDashboard extends Component{
 	render(){
         const subject=["Maths", "English"]         
         return(
-            <div className=" dashBody">     
-	            <header>  
+            <div className="dashBody">     
+	            <header >  
                             <div className="row childDashHeader">
                             <div className="col s2"><a id="logo-container x" href="#!" ><img className="brand-logo left logo"src={logo} alt='logo'/></a></div>
                             <div className="col s7 offset-s1  childDashTitle"> {this.state.username}'s Dashboard </div>
@@ -466,7 +466,7 @@ class ChildDashboard extends Component{
                                             <div className="container adjustSize">
                                                 <div className="row ">
                                                     <div className="col">
-                                                        {['Mix and Math',"Card Match","Blank Fill","Swan multup "].map((item,index) => {
+                                                        {["Card Match","Operation","Platformer"].map((item,index) => {
                                                         
                                                         return( <div className="gameProg" key={index}>
                                                                     <div className="games"> {item.toString()} </div>
@@ -477,9 +477,12 @@ class ChildDashboard extends Component{
                                                             })
                                                         }
                                                     </div>
+                                                    <div className="col seperator"></div>
+                                                   
                                                     <div className="col gameButtonDiv">
                                                         <button className="gameButtonStyle" onClick={this.toGames}>
-                                                       Click For Games -></button>
+                                                        <h5>Click Here <br />To Go To <br />Games</h5>
+                                                       <i className="material-icons right">chevron_right</i></button>
                                                     </div>
                                                 </div>  
                                             </div>

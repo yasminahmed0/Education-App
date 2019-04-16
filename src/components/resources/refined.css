@@ -204,12 +204,11 @@ text-align: left;
 
 
 .dashBody{
-  background: #B2FEFA;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to top, rgb(77, 225, 255), #B2FEFA);  
-  background: linear-gradient(to top, rgb(77, 219, 244), #B2FEFA); 
-
-  /* https://uigradients.com/#BlueSkies */
+  background: white;  /* fallback for old browsers */
+  background: linear-gradient(to top, #B2FEFA, white); 
   
+  /* background: -webkit-linear-gradient(to top, white, #4db6ac);   */
+  /* https://uigradients.com/#BlueSkies */  
 }
 
 
@@ -283,7 +282,7 @@ font-size: 8vh;
   margin-top: 3.5vh;
   font-family: Crayon, Arial, Helvetica, sans-serif;
   font-size: 1.5vw;
-  width: 20vw;
+  width: 15vw;
   margin-left: 2vw;
   text-align: right;
 }
@@ -291,7 +290,7 @@ font-size: 8vh;
 .medalRow{
   margin-top: 2.5vh;
   text-align: center;
-  width: 60vw;
+  width: 70vw;
 }
 
 .achievements{
@@ -313,7 +312,7 @@ font-family:Crayon, Arial, Helvetica, sans-serif;
   }
 
 .adjustSize{
-  width: 80%
+  width: 70%
 }
 
 .gameButtonDiv{
@@ -321,10 +320,15 @@ font-family:Crayon, Arial, Helvetica, sans-serif;
 }
 
 .gameButtonStyle{
-  background: transparent;
-  
-  border-color: teal;
+  background: transparent; 
+  border-left-color: black;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-top-color: transparent;
+}
 
+.seperator{
+  width: 7vw;
 }
 /*-------------------------------------------------*/
 /*-----------------Adult DashBoard-----------------*/
