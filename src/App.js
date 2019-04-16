@@ -7,11 +7,13 @@ import Maths from "./components/Subject/Maths";
 import Error from "./components/Error";
 import ChildDash from "./components/Dashboards/ChildDashboard";
 import AdultDashboard from './components/Dashboards/AdultDashboard';
-import mixandmath from './components/Games/mixandmath'
-//import firebase from './firebase'
-//import { getUser } from './firebase'
+import mixandmath from './components/Games/mixandmath/mixandmath'
 import Quiz from './components/Games/smallestSwan/QuizContainer'
 import store from './store'
+import math2D from './components/Games/mathsPlatformer/math2D'
+import operation from './components/Games/operations/OperandContainer'
+import cardmatch from './components/Games/cardmatch/GameContainer'
+import AllGames from './components/AllGames';
 
 class App extends Component {
 //how many times is this refreshed and when it does, is the constructor refreshed too
@@ -20,7 +22,7 @@ class App extends Component {
 //might need to place get store before this.state. check other componenent that use
     constructor(props){
         super(props)
-        console.log("here3")
+        
         this.state = {
             id: null,
             type: null
@@ -30,7 +32,6 @@ class App extends Component {
             const { account } = store.getState();
             //console.log("State: "+ JSON.stringify(store.getState()))
             //console.log("App.js user: "+JSON.stringify(account))
-            console.log("here4")
             if(account){
                 this.setState({
                     id: account.acc.user.uid,
@@ -38,7 +39,6 @@ class App extends Component {
                 })
             }
             else{ //not always doin
-                console.log("here2")
                 if(window.location.pathname !== "/"){
                     window.location.href = "/"
                 }
@@ -62,7 +62,11 @@ class App extends Component {
                     <Route path="/dashboard" component={toDisplay} />
                     {/* {this.state.type == "parent"  ? <Route path="/adultdash" component={AdultDashboard}/> : <Route path="/childdash" component={ChildDash}/>} */}
                     <Route path="/smallestSwan" component={Quiz}/> 
-                    <Route path="/sob" component={mixandmath} />
+                    <Route path="/mixandMath" component={mixandmath} />
+                    <Route path="/unityMath" component={math2D}/>
+                    <Route path="/operations" component={operation}/>
+                    <Route path="/cardmatch" component={cardmatch}/>
+                    <Route path="/allgames" component={AllGames} />
                     <Route component={Error} />
                 </Switch>
             </BrowserRouter>

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import logo from './resources/css/img/l.png';
+import logo2 from './resources/css/img/logo2.png';
+import logo5 from './resources/css/img/logo5.png';
 import M from "materialize-css"; 
-import './resources/refined2.css'
+import './resources/refined.css'
 
 
 export default class Header extends Component {
@@ -22,7 +24,7 @@ export default class Header extends Component {
             <div>
                 <nav className="teal lighten-2">
                     <div className="nav-wrapper">
-                    <a href="#!" className="brand-logo"><img className="logo"src={logo} alt='logo'/></a>
+                    <a href="#!" className="brand-logo"><img className="logo"src={logo5} alt='logo'/></a>
                     <a href="#!" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a> {/*warning, so added !*/}
                      <ul className="right hide-on-med-and-down x">
                     {this.state.info.map((item,key) => {
@@ -54,7 +56,7 @@ export default class Header extends Component {
 
                     </div>
                     </div>
-                    <div className="parallax"><img src="./background2.jpg" alt="Unsplashed background img 1"/></div>
+                    <div className="parallax"><img src="./background2.png" alt="Unsplashed background img 1"/></div>
                 </div>
             </div>
             

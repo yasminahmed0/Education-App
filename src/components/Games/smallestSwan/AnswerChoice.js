@@ -3,7 +3,7 @@ import React from "react"
 import AnswerIndividual from "./AnswerIndividual"
 
 function AnswerChoice(props){
-  //console.log("Answer Choice" + props.list)
+  console.log("Answer Choice" + props.list)
   const buttons = []
   for(let i=0;i<props.list.length;i++){
     buttons.push(
@@ -15,7 +15,7 @@ function AnswerChoice(props){
       />
     )
   }
-  //console.log(buttons)
+  console.log(buttons)
   return(
     <div>
     {buttons}

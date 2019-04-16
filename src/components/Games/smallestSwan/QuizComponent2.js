@@ -3,7 +3,7 @@ import React from "react"
 import AnswerList from "./AnswerList"
 
 function QuizComponent2(props){
-  console.log(props)
+  //console.log(props)
   //console.log("Current q" + props.data.currentq)
   //console.log(props.data.questions[props.data.currentq])
   const choicelistTemp = props.data.questions[props.data.currentq]

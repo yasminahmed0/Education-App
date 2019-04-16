@@ -123,7 +123,7 @@ firebase.auth().onAuthStateChanged(user => {
                                                 date: doc.data().date
                                                 //data: doc.data()
                                             })
-                                            console.log("gameData = "+ JSON.stringify(gameData))
+                                            //console.log("gameData = "+ JSON.stringify(gameData))
                                             //console.log(doc.id, " => ", doc.data());
                                         });
                                         //if(key2 === arr2.length-1){
@@ -134,14 +134,14 @@ firebase.auth().onAuthStateChanged(user => {
                                                 Games: gameData
                                             })
                                             //let data = {name,products}
-                                            console.log("inside 1")
-                                            console.log("products inside 1: "+JSON.stringify(products))
+                                            //console.log("inside 1")
+                                            //console.log("products inside 1: "+JSON.stringify(products))
                                         //}
                                         if(key === arr.length-1)  {
                                             //let allGames = [games]
                                             //let data = {name,products}
-                                            console.log("inside 2")
-                                            console.log("Product value inside IF 2: "+JSON.stringify(products))
+                                            //console.log("inside 2")
+                                            //console.log("Product value inside IF 2: "+JSON.stringify(products))
                                             let data = {name,children,childrenNames,products}
                                             store.dispatch({
                                                 type: "DATA",

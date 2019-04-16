@@ -2,6 +2,8 @@ import React from "react"
 import firebase from '../../../firebase'
 
 function GameEnd(props){
+  let total = props.data.incorrect+props.data.correct
+  let per = Math.round((props.data.correct/total)*100)
   let ref = firebase.firestore().collection("Children").doc(props.data.id)
   ref.get()
   .then(doc => {
@@ -11,7 +13,7 @@ function GameEnd(props){
         title: props.data.title,
         ncp: props.data.curriculumPoint, 
         date: props.data.date,
-        score: props.data.score
+        score: per
       })
       .then(docRef => {
         console.log("Document written with ID: ", docRef.id);
