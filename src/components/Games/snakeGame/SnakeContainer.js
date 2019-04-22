@@ -302,6 +302,7 @@ componentDidMount(){
     }
     else{
       return (
+        
         <div className='row snakeGamePage'>
         <div s={6} className='col s6 snakeInstructions'>
         <Instructions
@@ -326,6 +327,7 @@ componentDidMount(){
         </div>
         </div>
         </div>
+      
       )
   }
   }

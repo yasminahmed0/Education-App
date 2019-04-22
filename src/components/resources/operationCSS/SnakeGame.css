@@ -4,6 +4,11 @@
     url(./font/KGTenThousandReasons.ttf)format("truetype");
 }
 
+.plswork{
+  overflow: hidden;
+  position: absolute;
+}
+
 .snakeGamePage{
   background-image: url('../css/img/bg.jpeg');
   height: 80%;

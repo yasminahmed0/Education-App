@@ -3,7 +3,7 @@ import React from 'react'
 function Instructions(props){
   return(
     <div>
-    <br /><br />
+    <br />
     <p>Collect apples to make the snake grow</p>
     <br />
     <p>Watch out though! Don't hit the walls or go back on yourself</p>

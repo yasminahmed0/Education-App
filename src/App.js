@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 //import './components/resources/css/index.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Base from './components/Base';
-import English from "./components/Subject/English";
-import Maths from "./components/Subject/Maths";
+
 import Error from "./components/Error"; 
 import ChildDash from "./components/Dashboards/ChildDashboard";
 import AdultDashboard from './components/Dashboards/AdultDashboard';
 //import mixandmath from './components/Games/mixandmath/mixandmath'
-import Quiz from './components/Games/smallestSwan/QuizContainer'
 import store from './store'
 import math2D from './components/Games/mathsPlatformer/math2D'
 import operation from './components/Games/operations/OperandContainer'
@@ -60,21 +58,14 @@ class App extends Component {
             <BrowserRouter>
                 <Switch>
                     <Route exact path="/" component={Base} />  
-                    <Route path="/english" component={English} />
-                    <Route path="/maths" component={Maths} />
                     <Route path="/dashboard" component={toDisplay} />
                     {/* {this.state.type == "parent"  ? <Route path="/adultdash" component={AdultDashboard}/> : <Route path="/childdash" component={ChildDash}/>} */}
-                    
                     <Route path="/operations" component={operation}/>
                     <Route path="/cardmatch" component={cardmatch}/>
                     <Route path="/adventure" component={math2D}/>
-                    <Route path="/smallestSwan" component={Quiz}/>
-                    
                     <Route path="/canyoupunctuate" component={operationEnglish}/>
                     <Route path="/snake" component={snakeGame}/>
                     <Route path="/adventure" component={adventureGame}/>
-
-                    
                     <Route path="/allgames" component={AllGames} />
                     <Route component={Error} />
                 </Switch>
@@ -85,30 +76,3 @@ class App extends Component {
 }
 export default App;  
 
-//we can check if someone is signed in, then their account type. Then route them to correct page 
-
-// console.log("console log from App.js "+getUser)
-        
-        // getUser
-        // .then(((user) => {
-        //     this.setState({id: user.uid})
-        //     //console.log(this.state.id)
-        //     firebase.firestore().collection("Users").doc(this.state.id).get()
-        //     .then(function(doc){
-        //         if(doc.exists){
-        //             this.setState({
-        //                 type: doc.data().Type
-        //             })
-        //         }
-        //         else{
-        //             console.log(this.state.id)
-        //             console.log("App.js: document does not exist")
-        //         }
-        //     }.bind(this))
-        // }).bind(this))
-        // .catch(error => {
-        //     //one you sign out and log in again then auth state is null
-        //     if(window.location.pathname !== "/"){
-        //         window.location.href = "/"
-        //     }
-        // })

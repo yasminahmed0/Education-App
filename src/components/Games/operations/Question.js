@@ -40,15 +40,15 @@ function Question(props){
     )
   }
   // console.log(numpath)
-    return(
-      <div className="question">
-        {numpath}
-        <img className="questionImg" src="./operationGame/Numbers/qmorange.png" alt=""/>
-        {numpath2}
-        <img className="questionImg" src="./operationGame/Numbers/equals.png" alt=""/>
-        {numpath3}
-      </div>
-    )
+  return(
+    <div className="questionOperation">
+      {numpath}
+      <img className="questionImgOperation" src="./operationGame/Numbers/qmorange.png" alt=""/>
+      {numpath2}
+      <img className="questionImgOperation" src="./operationGame/Numbers/equals.png" alt=""/>
+      {numpath3}
+    </div>
+  )
 }
 
 export default Question

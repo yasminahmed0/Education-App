@@ -160,23 +160,27 @@ class OperandContainer extends Component{
   render(){
     if(this.state.topic === ""){
       return(
+        <div className='row operationGameRow'>
         <GameStart
           checkTopic = {this.checkTopic}
         />
+        </div>
       )
     }
     else if(this.state.finished){
       return(
+        <div className='row operationGameRow'>
         <GameEnd
           sendData = {this.sendData}
           data = {this.state}
           scoreButton = {this.scoreButton}
         />
+        </div>
       )
     }
     else{
       return(
-        <div>
+        <div className='row operationGameRow'>
           <ArithmeticComponent
             handleInput = {this.handleInput}
             setQuestions = {this.setQuestions}

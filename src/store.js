@@ -198,41 +198,8 @@ firebase.auth().onAuthStateChanged(user => {
     }
 })
 
-//subscribe and unsubscribe
+
 
 export default store;
 
-        // case "USER":
-        //     return{
-        //         ...state,
-        //        user: action.payload.user
-        //     } 
-
-
-//Examples:
-// store.dispatch({ //will be outside store.js, a way to update the state
-//     type:"INCREMENT",
-//     payload: 4
-// })
-
-// store.getStore()
-
-// const reducer = (state = initialState, action) => {
-//     console.log(action)
-//     switch(action.type){
-//         case "INCREMENT":
-//             return {
-//                 ...state,
-//                 count: state.count + action.payload
-//             }
-//         case "USER":
-//             return{
-//                 ...state,
-//                 user: action.payload.user
-//             }    
-//         default:
-//             console.log("Unknown action....: " + action.type)
-//             break;
-//     }
-// }
-
+        
