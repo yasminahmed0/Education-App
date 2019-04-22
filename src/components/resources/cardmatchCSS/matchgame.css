@@ -13,6 +13,7 @@ body {
   padding: 1em 2em;
   color: white;
   font-family: "KGTenThousandReasons";
+  
 }
 
 h1,
@@ -78,13 +79,28 @@ ul li {
 
 ul li ul {
   margin: 0.25em 1.25em;
+}*/
+
+.cardGamePage{
+  background-image: url('../css/img/bg.jpeg');
+  height: 80%;
+  text-align: center;
+  overflow: hidden;
+
+}
+
+.cardInstructions{
+  font-family: 'KGTenThousandReasons';
+  color:white;
+  font-size: 47px;
+  margin-right: 5%;
+  margin-left: 5%
 }
 
 .matchGameButton{
   border-radius: 4px;
   width: 40%;
   height:50px;
-  padding:;
   text-align: center;
   font-size: 26px;
   font-family: "KGTenThousandReasons";
@@ -106,4 +122,4 @@ ul li ul {
   font-size: 80px;
   font-family: "KGTenThousandReasons";
   color: #f1e0ff;
-} */
+} 

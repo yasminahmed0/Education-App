@@ -51,7 +51,7 @@ export default class feedback extends Component {
                              <p className="light feedbackFont"><em>{item.bq}</em></p>
                              
                              <br />
-                             <em><strong>{item.person}</strong> </em>
+                             <em><span className="teal-text">{"-"+item.person}</span> </em>
                          </div>
                         </div>
                     )
@@ -70,7 +70,6 @@ export default class feedback extends Component {
         )
     }
 }
-
 /*import React, { Component } from 'react';
 import Jane from './resources/css/img/Jane.jpg';
 import John from './resources/css/img/John.jpg';

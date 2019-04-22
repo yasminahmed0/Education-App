@@ -69,7 +69,9 @@ h4:hover {
 
 
 
-
+.footer{
+  height:5vh;
+}
 .container{
   text-align: center;
 }
@@ -205,8 +207,10 @@ text-align: left;
 
 .dashBody{
   background: white;  /* fallback for old browsers */
-  background: linear-gradient(to top, #B2FEFA, white); 
-  
+  background: linear-gradient(to top, #B2FEFA, white); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: -webkit-linear-gradient(to top, #B2FEFA, white);  /* Chrome 10-25, Safari 5.1-6 */
+  background-image: url(./css/img/bg.jpeg);
+   
   /* background: -webkit-linear-gradient(to top, white, #4db6ac);   */
   /* https://uigradients.com/#BlueSkies */  
 }
@@ -329,6 +333,12 @@ font-family:Crayon, Arial, Helvetica, sans-serif;
 
 .seperator{
   width: 7vw;
+}
+.toGameimg{
+  height:20vh;
+}
+.td{
+  text-align: right;
 }
 /*-------------------------------------------------*/
 /*-----------------Adult DashBoard-----------------*/
@@ -471,6 +481,8 @@ width:30vw;
   background: -webkit-linear-gradient(to top, rgb(77, 225, 255), #B2FEFA);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to top, rgb(77, 219, 244), #B2FEFA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   font-family:Crayon, Arial, Helvetica, sans-serif;
+  background-image: url(./css/img/bg.jpeg);
+  
 }
 .gameImages{
   width:10vw;
@@ -478,7 +490,12 @@ width:30vw;
 .gameInfo{
   margin-top: 1vw;
   margin-bottom:1vw;
+  font-size:1.5vw;
 }
+.gameTitle{
+  font-size:3vw;
+}
+
 .gamesList{
   width: 90%;
   color:white ; 

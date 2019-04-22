@@ -4,15 +4,18 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Base from './components/Base';
 import English from "./components/Subject/English";
 import Maths from "./components/Subject/Maths";
-import Error from "./components/Error";
+import Error from "./components/Error"; 
 import ChildDash from "./components/Dashboards/ChildDashboard";
 import AdultDashboard from './components/Dashboards/AdultDashboard';
-// import mixandmath from './components/Games/mixandmath/mixandmath'
+//import mixandmath from './components/Games/mixandmath/mixandmath'
 import Quiz from './components/Games/smallestSwan/QuizContainer'
 import store from './store'
 import math2D from './components/Games/mathsPlatformer/math2D'
 import operation from './components/Games/operations/OperandContainer'
-//import cardmatch from './components/Games/cardmatch/GameContainer'
+import cardmatch from './components/Games/cardmatch/GameContainer'
+import operationEnglish from './components/Games/canyoupunctuate/OperandContainer'
+import snakeGame from './components/Games/snakeGame/SnakeContainer'
+import adventureGame from './components/Games/adventure/adventureGame'
 import AllGames from './components/AllGames';
 
 class App extends Component {
@@ -61,11 +64,17 @@ class App extends Component {
                     <Route path="/maths" component={Maths} />
                     <Route path="/dashboard" component={toDisplay} />
                     {/* {this.state.type == "parent"  ? <Route path="/adultdash" component={AdultDashboard}/> : <Route path="/childdash" component={ChildDash}/>} */}
-                    <Route path="/smallestSwan" component={Quiz}/> 
-                    {/* <Route path="/mixandMath" component={mixandmath} /> */}
-                    <Route path="/unityMath" component={math2D}/>
+                    
                     <Route path="/operations" component={operation}/>
-                    {/* <Route path="/cardmatch" component={cardmatch}/> */}
+                    <Route path="/cardmatch" component={cardmatch}/>
+                    <Route path="/adventure" component={math2D}/>
+                    <Route path="/smallestSwan" component={Quiz}/>
+                    
+                    <Route path="/canyoupunctuate" component={operationEnglish}/>
+                    <Route path="/snake" component={snakeGame}/>
+                    <Route path="/adventure" component={adventureGame}/>
+
+                    
                     <Route path="/allgames" component={AllGames} />
                     <Route component={Error} />
                 </Switch>

@@ -5,7 +5,7 @@ function GameEnd(props){
   console.log("Score: "+props.data.score)
   console.log("Q count: "+props.data.questionCount)
   console.log("Correct count: "+props.data.correct)
-  
+
   if(props.data.isScoreHidden){
     return(
       <div className="gameStartEnd">
@@ -14,9 +14,7 @@ function GameEnd(props){
         </button>
       </div>
     )
-    
   }
-  
   else{
     let ref = firebase.firestore().collection("Children").doc(props.data.id)
     ref.get().then(doc => {

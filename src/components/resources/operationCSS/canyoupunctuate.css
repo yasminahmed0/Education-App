@@ -1,0 +1,77 @@
+@font-face {
+  font-family: "KGTenThousandReasons";
+  src:
+    url(./font/KGTenThousandReasons.ttf)format("truetype");
+}
+
+
+.gameStartEnd{
+  padding-top: 100px;
+}
+
+
+
+.topicBtn{
+  border-radius: 4px;
+  width: 40%;
+  height:50px;
+  text-align: center;
+  font-size: 26px;
+  font-family: "KGTenThousandReasons";
+  background-color: #f7f9fc;
+  margin-top: 80px;
+}
+
+.topicBtn:hover{
+  background-color: white;
+}
+
+.descriptionOperation{
+  font-family: "KGTenThousandReasons";
+  font-size: 38px;
+}
+
+.swanBtn{
+  margin: 20px;
+  /* This can be commented out if preferred */
+  background-color: #bfeeff;
+  border-radius: 8px;
+
+}
+
+.swanBtn:disabled{
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.swanBtn:hover{
+  background-color: white;
+}
+
+.questionOperation{
+  margin-top: 50px;
+  width: 50%;
+  left: 50%;
+  transform: translate(50%,50%);
+}
+
+.scoreBoardOperation{
+  margin-top: 80px;
+  font-size: 80px;
+  font-family: "KGTenThousandReasons";
+  color: #f1e0ff;
+}
+
+.questionImgOperation{
+  width:100px;
+  height:70px;
+}
+
+.questionImgNum{
+  width:90px;
+  height:90px;
+  /* This is the image number style. */
+  border: 3px solid #bfeeff;
+  border-radius: 5px;
+  border-style: outset;
+}

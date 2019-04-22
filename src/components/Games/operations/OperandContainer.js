@@ -93,7 +93,7 @@ class OperandContainer extends Component{
     }
 
     const questionTopic = Math.floor(Math.random() * Math.floor(2))
-    const question = Math.floor(Math.random() * Math.floor(smallestSet))
+    const question = Math.floor(Math.random() * Math.floor(this.state.questions1.length))
     // console.log("Question length: " + this.state.questions1.length)
     // console.log(questionTopic)
     // console.log(question)
@@ -138,6 +138,7 @@ class OperandContainer extends Component{
         topic: 1,
         questions1: additionSet,
         questions2: subtractionSet,
+        curriculumPoint: '1.1 Addition and Subtraction'
       })
     }
     else if(e.target.id === "2"){
@@ -146,6 +147,7 @@ class OperandContainer extends Component{
         topic: 2,
         questions1: multiplicationSet,
         questions2: divisionSet,
+        curriculumPoint: '1.2 Multiplication and Division'
       })
     }
     else{
