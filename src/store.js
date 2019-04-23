@@ -37,7 +37,7 @@ firebase.auth().onAuthStateChanged(user => {
     if(user){
         //console.log("setting user")
         let db = firebase.firestore()
-        firebase.firestore().collection("Users").doc(user.uid).get()
+        firebase.firestore().collection("").doc(user.uid).get()
         .then(function(doc) {
             if(doc.exists){
                 
@@ -50,13 +50,13 @@ firebase.auth().onAuthStateChanged(user => {
                         payload: { acc }
                     })
                     //SETTING DATA
-                    const ref = db.collection("Children").doc(user.uid)
+                    const ref = db.collection("").doc(user.uid)
                     ref.get().then(doc => {
                         const goal = doc.data().goal;
                         const age = doc.data().age;
                         const name = doc.data().name;
                         const gameProgress = []
-                        ref.collection("Plays").orderBy("date", "desc").get()
+                        ref.collection("").orderBy("date", "desc").get()
                         .then(function(querySnapshot) { //each game iteration push data into gameProgress array
                             querySnapshot.forEach((doc) => {
                                 gameProgress.push({
@@ -85,12 +85,12 @@ firebase.auth().onAuthStateChanged(user => {
                         payload: { acc }
                     })
                     //SETTING PARENT DATA
-                    db.collection("Parent").doc(user.uid)
+                    db.collection("").doc(user.uid)
                     .onSnapshot(function(doc){
                         const name = doc.data().name;
                         const children = doc.data().children
                         const childrenNames = []
-                        const ref = firebase.firestore().collection("Children")
+                        const ref = firebase.firestore().collection("")
                         //const gameData = []
                         const products = [] //holds info for all children
                         children.forEach((item, key, arr) => { //for each, loop needs to finish aysha,sid
@@ -103,7 +103,7 @@ firebase.auth().onAuthStateChanged(user => {
                                     childrenNames.push(doc.data().name)
                                     //go into db
                                 
-                                    ref.doc(item).collection("Plays").orderBy("date", "desc").get().then(function(querySnapshot) { //each game iteration push data into gameData array
+                                    ref.doc(item).collection("").orderBy("date", "desc").get().then(function(querySnapshot) { //each game iteration push data into gameData array
                                         querySnapshot.forEach((doc, key2, arr2) => {
                                             gameData.push({
                                                 gameID: doc.id,
@@ -138,7 +138,6 @@ firebase.auth().onAuthStateChanged(user => {
                         })
 
                     })
-                
                 }
             }
             else{
