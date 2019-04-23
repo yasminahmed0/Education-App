@@ -25,31 +25,22 @@ const reducer = (state = initialState, action) => {
                 data: action.payload.data
             }
         default:
-            console.log("Unknown action....: " + action.type)
+            //console.log("Unknown action....: " + action.type)
     }
 }
 
-//why is this here?
+
 const store = createStore(reducer);
 
-//order
-//REducer, auth until , 
-//as soon as someone signs in
+
 firebase.auth().onAuthStateChanged(user => {
     if(user){
-        console.log("setting user")
-        // store.dispatch({
-        //     type:"USER", //does it need to be capital?
-        //     payload: { user } 
-        // })
-        //goes to reducer 
-        //console.log("here")
-        //console.log(JSON.stringify(firebase.firebase()))
+        //console.log("setting user")
         let db = firebase.firestore()
         firebase.firestore().collection("").doc(user.uid).get()
         .then(function(doc) {
             if(doc.exists){
-                console.log(`if doc.exist -> user type: ${doc.data().Type}`)
+                
                 //CHILD
                 if(doc.data().Type === "child"){
                     const type = "child"
@@ -78,7 +69,7 @@ firebase.auth().onAuthStateChanged(user => {
                                 })
                             })
                             let data = {goal,age,name,gameProgress}
-                            console.log("children doc")
+               
                             store.dispatch({
                                 type: "DATA",
                                 payload: { data }
@@ -123,25 +114,15 @@ firebase.auth().onAuthStateChanged(user => {
                                                 date: doc.data().date
                                                 //data: doc.data()
                                             })
-                                            console.log("gameData = "+ JSON.stringify(gameData))
-                                            //console.log(doc.id, " => ", doc.data());
+                                           
                                         });
-                                        //if(key2 === arr2.length-1){
-                                            //let allGames = [games]
                                             products.push({ //after each children iterations done then push into product array which holds all info
                                                 childID: cID,
                                                 childName: childName,
                                                 Games: gameData
                                             })
-                                            //let data = {name,products}
-                                            console.log("inside 1")
-                                            console.log("products inside 1: "+JSON.stringify(products))
-                                        //}
+                                   
                                         if(key === arr.length-1)  {
-                                            //let allGames = [games]
-                                            //let data = {name,products}
-                                            console.log("inside 2")
-                                            console.log("Product value inside IF 2: "+JSON.stringify(products))
                                             let data = {name,children,childrenNames,products}
                                             store.dispatch({
                                                 type: "DATA",
@@ -157,54 +138,20 @@ firebase.auth().onAuthStateChanged(user => {
                         })
 
                     })
-                    
                 }
             }
             else{
-                console.log("Doc does not exist in user collection")
+                //console.log("Doc does not exist in user collection")
             }
         })        
     }
     else{
-        console.log("Store.js: No current user")
+        //console.log("Store.js: No current user")
     }
 })
 
-//subscribe and unsubscribe
+
 
 export default store;
 
-        // case "USER":
-        //     return{
-        //         ...state,
-        //        user: action.payload.user
-        //     } 
-
-
-//Examples:
-// store.dispatch({ //will be outside store.js, a way to update the state
-//     type:"INCREMENT",
-//     payload: 4
-// })
-
-// store.getStore()
-
-// const reducer = (state = initialState, action) => {
-//     console.log(action)
-//     switch(action.type){
-//         case "INCREMENT":
-//             return {
-//                 ...state,
-//                 count: state.count + action.payload
-//             }
-//         case "USER":
-//             return{
-//                 ...state,
-//                 user: action.payload.user
-//             }    
-//         default:
-//             console.log("Unknown action....: " + action.type)
-//             break;
-//     }
-// }
-
+        

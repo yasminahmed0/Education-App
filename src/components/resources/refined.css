@@ -1,7 +1,7 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* This sets the background colour, font colour, font style (weight and size). 
@@ -9,117 +9,497 @@
 - Because this is common amonst all field we will declare it in here and anything specific can be delcared/set later on.
 - The 'optimizeLegibility' emphasizes legibility over rendering speed and geometric precision. */
 html {
-    background-color:white;
-    color: #000000;
-    font-family: 'lato', 'Arial', sans-serif;
-    font-weight: 200;
-    font-size: 18px;
-    text-rendering: optimizeLegibility;
-    scroll-behavior: smooth;
+  background-color:white;
+  color: #000000;
+  font-family: 'lato', 'Arial', sans-serif;
+  font-weight: 200;
+  font-size: 18px;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
 }
+/*-------------------------------------------------*/
+/*----------------------Home Page------------------*/
+/*-------------------------------------------------*/
 
 .logo{
-    width:15vh;
+  width:15vh;
+  padding:1vw;
+  margin-top:-2vh;
   
-    padding:1vw;
-    margin-top:-2vh;
-    
 }
 
 .container{
-    text-align: center;
+  text-align: center;
 }
 
 .signup{
-    display: inline-block;
+  display: inline-block;
 }
 .testimonal{
-    width: 25vh;
+  width: 25vh;
 }
 
-.tabs .tab a{
-    color: #00acc1;
-} /*Black color to the text*/
-
-.tabs .tab a:hover {
-    background-color:#eee;
-    color:#00acc1;
-} /*Text color on hover*/
-
-.tabs .tab a.active {
-    background-color:white;
-    color:#00acc1;
-} /*Background and text color when a tab is active*/
-
-.tabs .indicator {
-    background-color:#00acc1;
+.text{
+text-align: left;
 }
-  .sidetabs{
-    background-color:red;
-        width:200px;
-        height:200px;
-        position:relative;
-        overflow:hidden;
-        color:white;
-    }
-    
-    .inner{
-        width:200px;
-        height:100px;
-        position:absolute;
-        left: -200px;
-        background-color:black;
-    color:white;
-    }
 
-    .childdashcon{
-        width: 80% !important;
-    }
-    .dashboard{
-        outline-color: #000000;
-       outline-style: auto;
-       height: 80% !important;
-     }
-     .footer{
-         height: 5vh;
-         
-     }
-     .footertext{
-        margin-left: 1vw;
-        margin-top: 1vw;
 
-     }
-     
-     .signupt{
-        border-bottom: transparent !important;
-     }
-     .modaltext{
-         text-align: left;
-     }
-     .pic{
-         outline-style: dashed;
-         outline-color: cornflowerblue;
-        
-     }
 
 i.icon-dark-green {
-    color: #004d40;
+  color: #004d40;
 }
 
 h4 {
-    display: inline-block;
-    transition: 500ms;
-    border-bottom: 2.5px solid transparent;
+  display: inline-block;
+  transition: 500ms;
+  border-bottom: 2.5px solid transparent;
 }
-  
+
 h4:hover {
-    border-color:#424242;
+  border-color:#424242;
 }
 
 .forgot-password{
-    font-size: 100%;
-    font-family: inherit;
-    padding: 0;
-    border: 0;
-    color: #00acc1
+  font-size: 100%;
+  font-family: inherit;
+  padding: 0;
+  border: 0;
+  color: #00acc1
+}
+
+
+
+.footer{
+  height:5vh;
+}
+.container{
+  text-align: center;
+}
+
+
+.signupt{
+border-bottom: transparent !important;
+}
+
+.modaltext{
+text-align: left;
+}
+
+.feedbackFont{
+  font-size: 24px;
+}
+
+/*-------------------------------------------------*/
+/*----------------Child Dashboard------------------*/
+/*-------------------------------------------------*/
+
+
+
+
+  .childdashcon{
+      width: 90% !important;
+  }
+ 
+   
+.childDashHeader{
+  margin-left: auto;
+} 
+  
+   .pic{
+       outline-style: dashed;
+       outline-color: cornflowerblue;
+      
+   }
+
+   /* Tab Styling  */
+
+.react-tabs {
+  -webkit-tap-highlight-color: transparent;
+  max-width: max-content;
+
+}
+
+.react-tabs__tab-list {
+  background: rgba(40,44,42,0.05);
+  margin: 0 0 px;
+  padding: 0;
+  padding-left: 2em;
+  display: flex;
+}
+
+
+.react-tabs__tab {
+  display: inline-block;
+  border-top: 1px solid transparent;
+  border-bottom: none;
+  bottom: -1px;
+  position: relative;
+  list-style: none;
+  padding: 6px 12px;
+  padding-left: 2em;
+  background-color:white;
+  border-color: #aaa;
+  width: 22.5vw;
+  height:8vh;
+  color: gray;
+  font-family:Crayon, Arial, Helvetica, sans-serif;
+  font-size: 1.5vw;;
+  
+}
+.icontabs{
+  font-size:2vw;
+  
+
+}
+.react-tabs__tab:first-child{
+  padding-left: 2em;
+  border-left: 1px solid #aaa;
+  
+
+}
+.react-tabs__tab:last-child{
+  padding-right: 2em;
+  border-right: 1px solid #aaa;
+
+}
+.react-tabs__tab--selected {
+  background-color : rgb(77, 219, 244);
+  color:white;
+  z-index: 10;
+}
+
+
+.react-tabs__tab:hover {
+  color: rgb(77, 219, 244);
+  outline: none;
+}
+.react-tabs__tab--selected:hover{
+  background-color : rgb(77, 219, 244)!important;
+  color:white;
+}
+.achievementTitle{
+  font-size: 2vw;
+}
+.react-tabs__tab:focus:after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  background: #fff;
+}
+
+.react-tabs__tab-panel {
+  display: none;
+  background-color: #fff;
+  padding :1vh;
+
+}
+
+.react-tabs__tab-panel--selected {
+  display: block;
+  border: 1px solid #aaa;
+  min-height: 70vh;
+  background-color: #fff;
+ 
+
+}
+
+
+.dashBody{
+  background: white;  /* fallback for old browsers */
+  background: linear-gradient(to top, #B2FEFA, white); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: -webkit-linear-gradient(to top, #B2FEFA, white);  /* Chrome 10-25, Safari 5.1-6 */
+  background-image: url(./css/img/bg.jpeg);
+   
+  /* background: -webkit-linear-gradient(to top, white, #4db6ac);   */
+  /* https://uigradients.com/#BlueSkies */  
+}
+
+
+.childDashTitle{
+  font-family:Crayon, Arial, Helvetica, sans-serif;
+  font-size: 4vw;
+  
+
+}
+.signOut{
+  /* outline-style: auto;
+  outline-color: #000000; */
+  font-family:Crayon, Arial, Helvetica, sans-serif;
+  font-size: 5vh;
+  
+}
+
+
+.signouticon{
+color:rgba(0, 0, 0, 0.467);
+font-size: 8vh; 
+}
+/* font */
+@font-face { font-family:Crayon ; src: url('./font/KGTenThousandReasonsAlt.ttf') } 
+.circle{
+  margin: 5vh;
+  height: 11vh;
+  width: 6vw;
+  background-color:transparent;
+  border:grey dashed;
+  border-radius: 50%;
+  display: inline-block;
+  float:left;
+}
+
+.medal{
+  height: 11vh;
+  width: 6vw;
+  float:left;
+  margin: 5vh;
+}
+
+.gamesPlayed{
+  font-family:Crayon, Arial, Helvetica, sans-serif;
+  border-radius: 30px 30px 30px 30px;
+  
+
+}
+.games{
+  font-size: 1.5vw;;
+}
+.gamesPlayedTitle{
+  display:flexbox;
+}
+
+.TabPanel{
+  background-color: #fff;
+  /* border-radius: 30px 30px 30px 30px; */
+  
+}
+
+.gameProg{
+  float:left;
+}
+
+.graphDisplay {
+  padding:2vh;
+}
+
+.childDashTitles{
+  margin-top: 3.5vh;
+  font-family: Crayon, Arial, Helvetica, sans-serif;
+  font-size: 1.5vw;
+  width: 15vw;
+  margin-left: 2vw;
+  text-align: right;
+}
+
+.medalRow{
+  margin-top: 2.5vh;
+  text-align: center;
+  width: 70vw;
+}
+
+.achievements{
+font-family:Crayon, Arial, Helvetica, sans-serif;
+}
+
+
+.settings{
+    border-right: 1px solid #aaa;
+    border-left: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
+ background-color: #fff;
+
+}
+
+  .statsTable{
+    font-family:Crayon, Arial, Helvetica, sans-serif;
+    font-size: 1.2vw;
+  }
+
+.adjustSize{
+  width: 70%
+}
+
+.gameButtonDiv{
+  float: right;
+}
+
+.gameButtonStyle{
+  background: transparent; 
+  border-left-color: black;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-top-color: transparent;
+}
+
+.seperator{
+  width: 7vw;
+}
+.toGameimg{
+  height:20vh;
+}
+.td{
+  text-align: right;
+}
+/*-------------------------------------------------*/
+/*-----------------Adult DashBoard-----------------*/
+/*-------------------------------------------------*/
+
+.adultDashBody{
+  background-color:whitesmoke; 
+}
+.adultDashChildren{
+  margin:1vw;
+}
+.cardcon{
+  margin:1vw;
+  font-size:2vh;
+}
+
+.recentPlaysAdult{
+  font-size:2.5vh;
+ 
+}
+.recentPlayCon{
+  text-align:center
+}
+.h3{
+font-size: 4vw;
+}
+h3{
+  margin:0;
+}
+.progressx{
+  height:fit-content;
+}
+
+ .adultSideNav{
+    height: 100%;
+    width: 14vw;;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+    background-color:#4db6ac;
+   
+    
+  }
+  .navList a{
+    margin-left: 1vw;
+  color:#f5f5f5 !important;
+  font-size:1.5vw;
+  
+    }
+.sout{
+font-size:2.3vw;
+
+}
+
+.adultDashContent{
+margin-left: 15vw; /* Same as the width of the sidenav */
+font-size: 28px; /* Increased text to enable scrolling */
+padding: 0px 10px;
+overflow-x: hidden;
+
+}
+.parentDashSubj{
+  height:28vh;
+  overflow-y: scroll;
+}
+.topCard{
+display: flex;
+justify-content: center;
+align-items: center;
+text-align:center;
+
+}
+.cardTitle{
+font-size: 1.5vw;
+}
+.cardInfo{
+  text-align: left;
+  padding:1vh;
+  font-size: 3.5vh;
+}
+.gameScores{
+font-size: 1.5vw;
+}
+
+.adultDashTbody{
+  font-size: 1.55vw;
+}
+
+.topCard{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align:center;
+
+}
+.cardInfo{
+    text-align: left;
+    padding:1vh;
+    font-size: 3.5vh;
+}
+
+.theader{
+ text-align: center;
+ color: #424242;
+}
+
+.spectablebody{
+font-size:1.5vw;
+
+}
+
+/*-------------------------------------------------*/
+/*-----------------Error Page----------------------*/
+/*-------------------------------------------------*/
+.errorBody{
+background: url(./css/img/background.png);
+height:120vh;
+}
+
+.errorText{
+vertical-align: middle;
+padding:20vh;
+width:80%;
+
+}
+
+.homeButton{
+width:30vw;
+}
+
+
+/*-------------------------------------------------*/
+/*-----------------All Games ----------------------*/
+/*-------------------------------------------------*/
+.allGamesBody{
+  background: #B2FEFA;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, rgb(77, 225, 255), #B2FEFA);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, rgb(77, 219, 244), #B2FEFA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  font-family:Crayon, Arial, Helvetica, sans-serif;
+  background-image: url(./css/img/bg.jpeg);
+  
+}
+.gameImages{
+  width:10vw;
+}
+.gameInfo{
+  margin-top: 1vw;
+  margin-bottom:1vw;
+  font-size:1.5vw;
+}
+.gameTitle{
+  font-size:3vw;
+}
+
+.gamesList{
+  width: 90%;
+  color:white ; 
+  background-color:#003400;
+  border: 0.5vw solid #855E42; 
+
 }

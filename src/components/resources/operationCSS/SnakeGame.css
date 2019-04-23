@@ -1,0 +1,159 @@
+@font-face {
+  font-family: "KGTenThousandReasons";
+  src:
+    url(./font/KGTenThousandReasons.ttf)format("truetype");
+}
+
+.plswork{
+  overflow: hidden;
+  position: absolute;
+}
+
+.snakeGamePage{
+  background-image: url('../css/img/bg.jpeg');
+  height: 80%;
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.game-container{
+  font-family: 'KGTenThousandReasons';
+}
+
+.game-area{
+  position:relative;
+  margin: 50px auto;
+  width: 500px;
+  height: 500px;
+  border: 2px solid #000;
+}
+
+.snake-dot{
+  position: absolute;
+  width: 2%;
+  height: 2%;
+  background-color: #000;
+  border: 1px solid #fff;
+  z-index: 2;
+}
+
+.snake-food{
+  position: absolute;
+  width: 2%;
+  height: 2%;
+  background-color: red;
+  border: 1px solid #fff;
+  z-index: 1;
+}
+
+.snakeModal{
+	position: relative;
+	width: 70%;
+	padding: 15px;
+  /* margin-left: 00px; */
+	box-sizing: border-box;
+	background-color: #fff;
+	margin: 40px auto;
+	border-radius: 3;
+	z-index: 2;
+	text-align: center;
+	box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+  animation-name: animatetop;
+  animation-duration: 0.3s
+}
+
+.snakeModalButton {
+  border-radius: 4px;
+  width: 70%;
+  height:50px;
+  text-align: center;
+  font-size: 16px;
+  font-family: "KGTenThousandReasons";
+  background-color: #f7f9fc;
+  margin-top: 20px;
+}
+
+@keyframes animatetop {
+  from{top:-300px; opacity: 0}
+  to{top: 0; opacity: 1}
+}
+
+.snakeInstructions{
+  font-family: 'KGTenThousandReasons';
+  color:white;
+  font-size: 39px;
+}
+
+/*@font-face {
+  font-family: "KGTenThousandReasons";
+  src:
+    url(./font/KGTenThousandReasons.ttf)format("truetype");
+}
+
+.game-container{
+  font-family: 'KGTenThousandReasons';
+}
+
+.game-area{
+  position:relative;
+  margin: 50px auto;
+  width: 500px;
+  height: 500px;
+  border: 2px solid #000;
+}
+
+.snake-dot{
+  position: absolute;
+  width: 2%;
+  height: 2%;
+  background-color: #000;
+  border: 1px solid #fff;
+  z-index: 2;
+}
+
+.snake-food{
+  position: absolute;
+  width: 2%;
+  height: 2%;
+  background-color: red;
+  border: 1px solid #fff;
+  z-index: 1;
+}
+
+.snakeModal{
+	position: relative;
+	width: 40%;
+	padding: 20px;
+	box-sizing: border-box;
+	background-color: #fff;
+	margin: 40px auto;
+	border-radius: 3;
+	z-index: 2;
+	text-align: center;
+	box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+  animation-name: animatetop;
+  animation-duration: 0.3s
+  
+}
+
+.snakeModalButton {
+  border-radius: 4px;
+  width: 40%;
+  height:50px;
+  text-align: center;
+  font-size: 16px;
+  font-family: "KGTenThousandReasons";
+  background-color: #f7f9fc;
+  margin-top: 20px;
+}
+
+.selectTag{
+  display: block;
+}
+
+@keyframes animatetop {
+  from{top:-300px; opacity: 0}
+  to{top: 0; opacity: 1}
+}
+*/
